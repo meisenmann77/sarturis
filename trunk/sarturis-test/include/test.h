@@ -1,0 +1,2 @@
+int library_function();
+
