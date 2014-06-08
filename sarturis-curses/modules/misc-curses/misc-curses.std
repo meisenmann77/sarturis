@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../../sarturis/common/typedefinition.xsd">
+
+  <Module Name="misc-curses" Vendor="TU Dresden">
+
+    <!-- Window -->
+    <Type Name="sarturis::curses::Window">
+      <Base Type="sarturis::curses::Widget"/>
+      <Attribute Name="X" Type="integer"/>
+      <Attribute Name="Y" Type="integer"/>
+      <Attribute Name="Width" Type="integer"/>
+      <Attribute Name="Height" Type="integer"/>
+      <Attribute Name="Caption" Type="string"/>
+      <Attribute Name="BgColor" Type="string" Default="Blue"/>
+      <Attribute Name="FgColor" Type="string" Default="White"/>
+    </Type>
+
+    <!-- ProgressBar -->
+    <Type Name="sarturis::curses::ProgressBar">
+      <Base Type="sarturis::curses::Widget"/>
+      <Base Type="sarturis::AnalogOutput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="X" Type="integer"/>
+      <Attribute Name="Y" Type="integer"/>
+      <Attribute Name="Width" Type="integer"/>
+      <Attribute Name="Min" Type="double" Default="-1"/>
+      <Attribute Name="Max" Type="double" Default="1"/>
+      <Attribute Name="Value" Type="double" Default="0"/>
+      <Attribute Name="ShowValue" Type="boolean" Default="true"/>
+      <Attribute Name="BgColor" Type="string" Default="Blue"/>
+      <Attribute Name="FgColor" Type="string" Default="White"/>
+    </Type>
+
+    <!-- Label -->
+    <Type Name="sarturis::curses::Label">
+      <Base Type="sarturis::curses::Widget"/>
+      <Attribute Name="X" Type="integer"/>
+      <Attribute Name="Y" Type="integer"/>
+      <Attribute Name="Caption" Type="string"/>
+      <Attribute Name="BgColor" Type="string" Default="Blue"/>
+      <Attribute Name="FgColor" Type="string" Default="White"/>
+    </Type>
+
+    <!-- AnalogSlider -->
+    <Type Name="sarturis::curses::AnalogSlider">
+      <Base Type="sarturis::curses::Widget"/>
+      <Base Type="sarturis::AnalogInput"/>
+      <Attribute Name="X" Type="integer"/>
+      <Attribute Name="Y" Type="integer"/>
+      <Attribute Name="Width" Type="integer"/>
+      <Attribute Name="Min" Type="double" Default="-1"/>
+      <Attribute Name="Max" Type="double" Default="1"/>
+      <Attribute Name="Value" Type="double" Default="0"/>
+      <Attribute Name="ShowValue" Type="boolean" Default="true"/>
+      <Attribute Name="BgColor" Type="string" Default="Blue"/>
+      <Attribute Name="FgColor" Type="string" Default="White"/>
+    </Type>
+
+    <!-- Iteration -->
+    <Type Name="sarturis::curses::Iteration" Comment="Curses main iteration - don't forget this">
+      <Base Type="sarturis::Executable"/>
+      <Reference Name="Widget" Min="1" Max="-1">
+        <Instance Type="sarturis::curses::Widget"/>
+      </Reference>
+    </Type>
+
+    <CodeGeneration>
+      <ModuleInclude Filename="include/bardrawer.h"/>
+      <ModuleInclude Filename="include/progressbar.h"/>
+      <ModuleInclude Filename="include/label.h"/>
+      <ModuleInclude Filename="include/analogslider.h"/>
+      <ModuleInclude Filename="include/window.h"/>
+      <ModuleInclude Filename="include/iteration.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
+

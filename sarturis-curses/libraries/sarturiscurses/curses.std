@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../../sarturis/common/typedefinition.xsd">
+
+  <Library Name="sarturiscurses" Vendor="TU Dresden">
+
+    <!-- Basis-Typ -->
+    <Interface Name="sarturis::curses::Widget" Comment="Interface to NCurses widget"/>
+  </Library>
+
+</TypeDefinition>
+
