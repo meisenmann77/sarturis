@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../common/typedefinition.xsd">
+
+  <Module Name="gtkwidget-io" Vendor="TU Dresden" Comment="GTK widgets for showing and manipulation analog, digital or vector data">
+
+    <!-- VectorDisplay -->
+    <Type Name="sarturis::gtk::VectorDisplay" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::Updateable"/>
+      <Reference Name="VectorInput">
+        <Instance Type="sarturis::VectorInput"/>
+      </Reference>
+    </Type>
+
+    <!-- NumberDisplay -->
+    <Type Name="sarturis::gtk::NumberDisplay" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::AnalogOutput"/>
+      <Base Type="sarturis::DigitalOutput"/>
+      <Base Type="sarturis::Updateable"/>
+    </Type>
+
+    <!-- DigitalLED -->
+    <Type Name="sarturis::gtk::DigitalLED" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::DigitalOutput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="Red" Type="double" Default="1.0"/>
+      <Attribute Name="Green" Type="double" Default="0.0"/>
+      <Attribute Name="Blue" Type="double" Default="0.0"/>
+    </Type>
+
+    <!-- AnalogProgressBar -->
+    <Type Name="sarturis::gtk::AnalogProgressBar" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::AnalogOutput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="Min" Type="double"/>
+      <Attribute Name="Max" Type="double"/>
+      <Attribute Name="ShowValue" Type="boolean" Default="true"/>
+      <Attribute Name="Orientation" Type="string" Default="left-to-right"/>
+    </Type>
+
+    <!-- AnalogSlider -->
+    <Type Name="sarturis::gtk::AnalogSlider" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::AnalogInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="Value" Type="double"/>
+      <Attribute Name="Min" Type="double"/>
+      <Attribute Name="Max" Type="double"/>
+      <Attribute Name="Orientation" Type="string" Default="horizontal"/>
+      <Attribute Name="ShowValue" Type="boolean" Default="false"/>
+      <Attribute Name="Digits" Type="integer" Default="4"/>
+    </Type>
+
+    <!-- DigitalSlider -->
+    <Type Name="sarturis::gtk::DigitalSlider" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::DigitalInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="Value" Type="integer"/>
+      <Attribute Name="Min" Type="integer"/>
+      <Attribute Name="Max" Type="integer"/>
+      <Attribute Name="Orientation" Type="string" Default="horizontal"/>
+      <Attribute Name="ShowValue" Type="boolean" Default="false"/>
+    </Type>
+
+    <!-- DigitalToggleButton -->
+    <Type Name="sarturis::gtk::DigitalToggleButton" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::DigitalInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="Toggled" Type="boolean" Default="false"/>
+      <Reference Name="Label">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+    
+    <!-- DigitalRadioButton -->
+    <Type Name="sarturis::gtk::DigitalRadioButton" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::DigitalInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Reference Name="Label">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+      <Reference Name="GroupMember" Min="0" Max="1">
+        <Instance Type="sarturis::gtk::DigitalRadioButton"/>
+      </Reference>
+    </Type>
+
+    <!-- DigitalButton -->
+    <Type Name="sarturis::gtk::DigitalButton" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::DigitalInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Reference Name="Label">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+
+    <!-- TextEdit -->
+    <Type Name="sarturis::gtk::TextEdit" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::TextInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="Text" Type="string" Default="__EMPTY__"/>
+    </Type>
+
+    <!-- TextDisplay -->
+    <Type Name="sarturis::gtk::TextDisplay" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::TextOutput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="Text" Type="string" Default="__EMPTY__"/>
+    </Type>
+
+    <!-- ComboBox -->
+    <Type Name="sarturis::gtk::ComboBox" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::TextInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Configuration Name="Item" Min="1" Max="-1">
+      	<Attribute Name="Text" Type="string" Default=""/>
+      </Configuration>
+    </Type>
+
+    <!-- AnalogSelector -->
+    <Type Name="sarturis::gtk::AnalogSelector" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::AnalogInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Reference Name="Item" Min="0" Max="-1">
+        <Instance Type="sarturis::AnalogInput"/>
+      	<Attribute Name="Caption" Type="string"/>
+      </Reference>
+    </Type>
+
+    <!-- DigitalSelector -->
+    <Type Name="sarturis::gtk::DigitalSelector" Color="#FFA42B">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::DigitalInput"/>
+      <Base Type="sarturis::Updateable"/>
+      <Reference Name="Item" Min="0" Max="-1">
+        <Instance Type="sarturis::DigitalInput"/>
+      	<Attribute Name="Caption" Type="string"/>
+      </Reference>
+    </Type>
+
+    <CodeGeneration>
+      <ConfigInclude Filename="sarturis/interface/analoginput.h"/>
+      <ConfigInclude Filename="sarturis/interface/digitalinput.h"/>
+      <ConfigInclude Filename="sarturis/interface/vectorinput.h"/>
+      <ConfigInclude Filename="sarturis/interface/executable.h"/>
+      <ConfigInclude Filename="include/digitalradiobutton.h"/>
+      <ModuleInclude Filename="include/vectordisplay.h"/>
+      <ModuleInclude Filename="include/analogslider.h"/>
+      <ModuleInclude Filename="include/digitalslider.h"/>
+      <ModuleInclude Filename="include/analogprogressbar.h"/>
+      <ModuleInclude Filename="include/digitalled.h"/>
+      <ModuleInclude Filename="include/numberdisplay.h"/>
+      <ModuleInclude Filename="include/digitalbutton.h"/>
+      <ModuleInclude Filename="include/digitaltogglebutton.h"/>
+      <ModuleInclude Filename="include/digitalradiobutton.h"/>
+      <ModuleInclude Filename="include/textedit.h"/>
+      <ModuleInclude Filename="include/textdisplay.h"/>
+      <ModuleInclude Filename="include/combobox.h"/>
+      <ModuleInclude Filename="include/inputselector.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
+

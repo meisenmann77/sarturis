@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../common/typedefinition.xsd">
+
+  <Module Name="gtkwidget-playercontrol" Vendor="TU Dresden">
+
+    <!-- PlayerControlWidget -->
+    <Type Name="sarturis::gtk::PlayerControl">
+      <Base Type="sarturis::Updateable"/>
+      <Attribute Name="Schrittweite" Type="double" />
+      <Attribute Name="Startzeit" Type="integer" Default="0"/>
+      <Attribute Name="Endzeit" Type="integer" Default="1"/>
+      <Reference Name="Time" Min="0" Max="1">
+        <Instance Type="sarturis::AnalogOutput"/>
+      </Reference>
+      <Reference Name="Play" Min="0" Max="1">
+        <Instance Type="sarturis::DigitalOutput"/>
+      </Reference>
+      <Reference Name="OnStart" Min="0" Max="1">
+        <Instance Type="sarturis::Executable"/>
+      </Reference>
+
+    </Type>
+
+    <!-- Includes -->
+    <CodeGeneration>
+      <ModuleInclude Filename="include/playercontrol.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
+

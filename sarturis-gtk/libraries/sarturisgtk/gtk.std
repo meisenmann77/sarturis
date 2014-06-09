@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../common/typedefinition.xsd">
+
+  <Library Name="sarturisgtk" Vendor="TU Dresden">
+
+    <!-- Widget -->
+    <Interface Name="sarturis::gtk::Widget" Color="#FFA42B" Comment="Interface fuer Executable"/>
+
+    <!-- Handler -->
+    <Interface Name="sarturis::gtk::Handler" Color="#FFA42B" Comment="Interface fuer Handler"/>
+    <Interface Name="sarturis::gtk::Handler::Factory" Color="#FFA42B" Comment="Interface fuer Handler"/>
+
+  </Library>
+</TypeDefinition>

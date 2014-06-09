@@ -1,0 +1,35 @@
+/********************************************************************/
+/*                                                                  */
+/* This file is generated automatically during cmake configuration. */
+/* DO NOT EDIT!                                                     */
+/*                                                                  */
+/* To overwrite the splash image path set the cmake variable        */
+/* SPLASH_IMAGE and rebuild this project.                           */
+/*                                                                  */
+/* To configure the text position set cmake variables               */
+/* SPLASH_TEXT_POS_X and SPLASH_TEXT_POS_Y.                         */
+/*                                                                  */
+/* To configure text color and bar color (modification of           */
+/* background color) set cmake variables                            */
+/* SPLASH_TEXT_COLOR and SPLASH_BAR_COLOR_MULTIPLIER                */
+/*                                                                  */
+/********************************************************************/
+
+// Image
+#include "@SPLASH_FILE_NAME_WE@.h"
+#define SPLASH_IMAGE _@SPLASH_SYMBOL_NAME@_
+
+// Text position and size
+#define SPLASH_TEXT_POS_X @SPLASH_TEXT_POS_X@
+#define SPLASH_TEXT_POS_Y @SPLASH_TEXT_POS_Y@
+#define SPLASH_TEXT_SIZE 11
+
+// Version position
+#define VERSION_TEXT_POS_X @VERSION_TEXT_POS_X@
+#define VERSION_TEXT_POS_Y @VERSION_TEXT_POS_Y@
+
+// Text color
+#define SPLASH_TEXT_COLOR {@SPLASH_TEXT_COLOR@}
+
+// Bar color (modified background)
+#define SPLASH_BAR_COLOR_MULTIPLIER {@SPLASH_BAR_COLOR_MULTIPLIER@}

@@ -1,0 +1,53 @@
+# Default-Splash-Image
+IF(NOT SPLASH_IMAGE)
+  SET(SPLASH_IMAGE ${CMAKE_CURRENT_SOURCE_DIR}/default.png)
+ENDIF(NOT SPLASH_IMAGE)
+
+# Ausgabe, Code und Dateiname
+MESSAGE(STATUS "splash image is " ${SPLASH_IMAGE})
+ADD_DEFINITIONS(-DSHOW_SPLASH)
+IF(GTK_VERSION_GTK2)
+  SET(splash_files splashscreen2.cpp include/splashscreen.h include/splashscreen2.h)
+ENDIF(GTK_VERSION_GTK2)
+IF(GTK_VERSION_GTK3)
+  SET(splash_files splashscreen3.cpp include/splashscreen.h include/splashscreen3.h)
+ENDIF(GTK_VERSION_GTK3)
+GET_FILENAME_COMPONENT(SPLASH_FILE_NAME_WE ${SPLASH_IMAGE} NAME_WE)
+STRING(REPLACE "-" "_" SPLASH_SYMBOL_NAME ${SPLASH_FILE_NAME_WE})
+
+# Code einbetten
+INCLUDE(sarturis-codeembed)
+CODEEMBED(${SPLASH_IMAGE})
+SET(splash_files ${splash_files} ${CMAKE_CURRENT_BINARY_DIR}/${SPLASH_FILE_NAME_WE}.h)
+
+# Splash-Text
+IF(NOT SPLASH_TEXT_POS_X)
+  SET(SPLASH_TEXT_POS_X 8)
+ENDIF(NOT SPLASH_TEXT_POS_X)
+IF(NOT SPLASH_TEXT_POS_Y)
+  SET(SPLASH_TEXT_POS_Y 16)
+ENDIF(NOT SPLASH_TEXT_POS_Y)
+
+# Versions-Text
+IF(NOT VERSION_TEXT_POS_X)
+  SET(VERSION_TEXT_POS_X 5)
+ENDIF(NOT VERSION_TEXT_POS_X)
+IF(NOT VERSION_TEXT_POS_Y)
+  SET(VERSION_TEXT_POS_Y 5)
+ENDIF(NOT VERSION_TEXT_POS_Y)
+
+# Text-Farbe
+IF(NOT SPLASH_TEXT_COLOR)
+ SET(SPLASH_TEXT_COLOR "1.0,1.0,1.0")
+ENDIF(NOT SPLASH_TEXT_COLOR)
+
+# Balken-Farbe
+IF(NOT SPLASH_BAR_COLOR_MULTIPLIER)
+ SET(SPLASH_BAR_COLOR_MULTIPLIER "0.4,0.4,0.4")
+ENDIF(NOT SPLASH_BAR_COLOR_MULTIPLIER)
+
+# Header mit Splash-Config generieren
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/include/splash_image.in
+               ${CMAKE_CURRENT_BINARY_DIR}/splash_image.h)
+SET(splash_files ${splash_files} ${CMAKE_CURRENT_SOURCE_DIR}/include/splash_image.in
+                                 ${CMAKE_CURRENT_BINARY_DIR}/splash_image.h)

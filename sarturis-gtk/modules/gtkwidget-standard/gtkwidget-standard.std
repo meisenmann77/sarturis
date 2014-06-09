@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../common/typedefinition.xsd">
+
+  <Module Name="gtkwidget-standard" Vendor="TU Dresden" Comment="Standard GTK widgets for gui configuration">
+
+    <!-- HPaned -->
+    <Type Name="sarturis::gtk::HPaned">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Position" Type="integer" Default="0"/>
+      <Reference Name="Left">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+      <Reference Name="Right">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+
+    <!-- VPaned -->
+    <Type Name="sarturis::gtk::VPaned">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Position" Type="integer" Default="0"/>
+      <Reference Name="Upper">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+      <Reference Name="Lower">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+
+    <!-- Notebook -->
+    <Type Name="sarturis::gtk::Notebook">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Active" Type="integer" Default="0"/>
+      <Reference Name="Page" Min="1" Max="-1">
+        <Instance Type="sarturis::gtk::Widget"/>
+        <Attribute Name="Caption" Type="string"/>        
+      </Reference>
+    </Type>
+
+    <!-- HBox -->
+    <Type Name="sarturis::gtk::HBox">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Homogeneous" Type="boolean" Default="false"/>
+      <Attribute Name="Spacing" Type="integer" Default="0"/>
+      <Attribute Name="BorderWidth" Type="integer" Default="0"/>
+      <Reference Name="PackStart" Min="0" Max="-1">
+        <Instance Type="sarturis::gtk::Widget"/>
+        <Attribute Name="Expand" Type="boolean" Default="true"/>
+        <Attribute Name="Fill" Type="boolean" Default="true"/>
+        <Attribute Name="Padding" Type="integer" Default="0"/>
+      </Reference>
+      <Reference Name="PackEnd" Min="0" Max="-1">
+        <Instance Type="sarturis::gtk::Widget"/>
+        <Attribute Name="Expand" Type="boolean" Default="true"/>
+        <Attribute Name="Fill" Type="boolean" Default="true"/>
+        <Attribute Name="Padding" Type="integer" Default="0"/>
+      </Reference>
+    </Type>
+
+    <!-- VBox -->
+    <Type Name="sarturis::gtk::VBox">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Homogeneous" Type="boolean" Default="false"/>
+      <Attribute Name="Spacing" Type="integer" Default="0"/>
+      <Attribute Name="BorderWidth" Type="integer" Default="0"/>
+      <Reference Name="PackStart" Min="0" Max="-1">
+        <Instance Type="sarturis::gtk::Widget"/>
+        <Attribute Name="Expand" Type="boolean" Default="true"/>
+        <Attribute Name="Fill" Type="boolean" Default="true"/>
+        <Attribute Name="Padding" Type="integer" Default="0"/>
+      </Reference>
+      <Reference Name="PackEnd" Min="0" Max="-1">
+        <Instance Type="sarturis::gtk::Widget"/>
+        <Attribute Name="Expand" Type="boolean" Default="true"/>
+        <Attribute Name="Fill" Type="boolean" Default="true"/>
+        <Attribute Name="Padding" Type="integer" Default="0"/>
+      </Reference>
+    </Type>
+
+    <!-- Table -->
+    <Type Name="sarturis::gtk::Table">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Homogeneous" Type="boolean" Default="true"/>
+      <Reference Name="Cell" Min="1" Max="-1">
+        <Instance Type="sarturis::gtk::Widget"/>
+        <Attribute Name="Left" Type="integer"/>
+        <Attribute Name="Right" Type="integer"/>
+        <Attribute Name="Top" Type="integer"/>
+        <Attribute Name="Bottom" Type="integer"/>
+        <Attribute Name="Expand" Type="boolean" Default="true"/>
+        <Attribute Name="Shrink" Type="boolean" Default="false"/>
+        <Attribute Name="Fill" Type="boolean" Default="true"/>
+        <Attribute Name="Padding" Type="integer" Default="0"/>
+      </Reference>
+    </Type>
+
+    <!-- ScrolledWindow -->
+    <Type Name="sarturis::gtk::ScrolledWindow">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="ScrollX" Type="boolean" Default="true"/>
+      <Attribute Name="ScrollY" Type="boolean" Default="true"/>
+      <Reference Name="Child">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+
+    <!-- Frame -->
+    <Type Name="sarturis::gtk::Frame">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="BorderWidth" Type="integer" Default="0"/>
+      <Reference Name="Child" Min="1" Max="1">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+      <Reference Name="Caption" Min="1" Max="1">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+
+    <!-- Label -->
+    <Type Name="sarturis::gtk::Label">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Text" Type="string"/>
+      <Attribute Name="Markup" Type="boolean" Default="true"/>
+      <Attribute Name="LineWrap" Type="boolean" Default="false"/>
+      <Attribute Name="XAlignment" Type="double" Default="0.5"/>
+      <Attribute Name="YAlignment" Type="double" Default="0.5"/>
+    </Type>
+
+    <!-- Image -->
+    <Type Name="sarturis::gtk::Image">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Filename" Type="string"/>
+    </Type>
+
+    <!-- StockImage -->
+    <Type Name="sarturis::gtk::StockImage">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="StockId" Type="string"/>
+    </Type>
+
+    <!-- Background-Image -->
+    <Type Name="sarturis::gtk::BackgroundImage">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Filename" Type="string"/>
+      <Reference Name="Child" Min="1" Max="1">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+
+    <!-- Expander -->
+    <Type Name="sarturis::gtk::Expander">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Caption" Type="string"/>
+      <Attribute Name="Expanded" Type="boolean" Default="true"/>
+      <Reference Name="Child">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+
+    <!-- Button -->
+    <Type Name="sarturis::gtk::Button">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Reference Name="Label">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+      <Reference Name="OnClick" Min="0" Max="1">
+        <Instance Type="sarturis::Executable"/>
+      </Reference>
+    </Type>
+
+    <!-- ToggleButton -->
+    <Type Name="sarturis::gtk::ToggleButton">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Reference Name="Label">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+      <Reference Name="OnToggleOn" Min="0" Max="1">
+        <Instance Type="sarturis::Executable"/>
+      </Reference>
+      <Reference Name="OnToggleOff" Min="0" Max="1">
+        <Instance Type="sarturis::Executable"/>
+      </Reference>
+    </Type>
+
+    <!-- USize -->
+    <Type Name="sarturis::gtk::USize">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Width" Type="integer" Default="-1"/>
+      <Attribute Name="Height" Type="integer" Default="-1"/>
+      <Reference Name="Child">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>      
+
+    <!-- SizeGroup -->
+    <Type Name="sarturis::gtk::SizeGroup">
+      <Attribute Name="Orientation" Type="string" Comment="entweder Vertical oder Horizontal"/>
+      <Reference Name="Widget" Min="1" Max="-1">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+    </Type>
+
+    <!-- Window als ApplicationContext, kommt aus Library wird aber von diesem Modul bereitgestellt -->
+    <Type Name="sarturis::application::gtk::Window" Comment="Application context for a gtk window.">
+      <Base Type="sarturis::application::Context"/>
+      <Attribute Name="Title" Type="string" Comment="Window title"/>
+      <Attribute Name="X" Type="integer" Default="-1" Comment="X coordinate"/>
+      <Attribute Name="Y" Type="integer" Default="-1" Comment="Y coordinate"/>
+      <Attribute Name="Width" Type="integer" Default="640" Comment="Width"/>
+      <Attribute Name="Height" Type="integer" Default="480" Comment="Height"/>
+      <Attribute Name="BorderWidth" Type="integer" Default="5" Comment="Width of the window border"/>
+      <Attribute Name="FullScreen" Type="boolean" Default="false" Comment="Fullscreen flag - overrides width and height if set"/>
+      <Attribute Name="QuitOnClose" Type="boolean" Default="true" Comment="Quit flag - stop Sarturis if the window is closed"/>
+      <Attribute Name="AllowClose" Type="boolean" Default="true" Comment="Close flag - allow or disallow users to close the window"/>
+      <Reference Name="Widget">
+        <Instance Type="sarturis::gtk::Widget"/>
+      </Reference>
+      <Configuration Name="Icon" Min="0" Max="1">
+        <Attribute Name="Filename" Type="string"/>
+      </Configuration>
+    </Type>
+
+    <CodeGeneration>
+      <ConfigInclude Filename="sarturis/interface/executable.h"/>
+      <ModuleInclude Filename="include/box.h"/>
+      <ModuleInclude Filename="include/button.h"/>
+      <ModuleInclude Filename="include/expander.h"/>
+      <ModuleInclude Filename="include/frame.h"/>
+      <ModuleInclude Filename="include/image.h"/>
+      <ModuleInclude Filename="include/label.h"/>
+      <ModuleInclude Filename="include/notebook.h"/>
+      <ModuleInclude Filename="include/paned.h"/>
+      <ModuleInclude Filename="include/scrolledwindow.h"/>
+      <ModuleInclude Filename="include/sizegroup.h"/>
+      <ModuleInclude Filename="include/stockimage.h"/>
+      <ModuleInclude Filename="include/backgroundimage.h"/>
+      <ModuleInclude Filename="include/table.h"/>
+      <ModuleInclude Filename="include/togglebutton.h"/>
+      <ModuleInclude Filename="include/usize.h"/>
+      <ModuleInclude Filename="include/window.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
+
