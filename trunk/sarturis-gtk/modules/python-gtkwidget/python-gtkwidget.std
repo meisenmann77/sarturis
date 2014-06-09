@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="C:/Program Files (x86)/sarturis/share/sarturis/schema/typedefinition.xsd">
+
+  <Module Name="python-gtkwidget" Vendor="Timo Penndorf">
+
+    <!-- Widget -->
+    <Type Name="sarturis::python::gtk::Widget" Comment="Python wrapper for a GtkWidget from PyGTK">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Attribute Name="Key" Type="string"/>
+      <Reference Name="Parent" Min="0" Max="-1">
+        <Instance Type="sarturis::python::gtk::Widget"/>
+      </Reference>
+      <Reference Name="Children" Min="0" Max="-1">
+        <Instance Type="sarturis::gtk::Widget"/>
+        <Attribute Name="Parent" Type="string"/>
+      </Reference>
+    </Type>
+
+    <!-- Includes -->
+    <CodeGeneration>
+      <ModuleInclude Filename="include/gtkwidget.h"/>
+    </CodeGeneration>
+
+  </Module>
+</TypeDefinition>

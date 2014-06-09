@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../common/typedefinition.xsd">
+
+  <Module Name="tray-notifier" Vendor="Timo Penndorf">
+
+    <!-- TrayNotifier -->
+    <Type Name="sarturis::gtk::TrayNotifier">
+      <Base Type="sarturis::Executable"/>
+      <Reference Name="Title">
+        <Instance Type="sarturis::TextInput"/>
+      </Reference>
+      <Reference Name="Message">
+        <Instance Type="sarturis::TextInput"/>
+      </Reference>
+    </Type>
+
+    <CodeGeneration>
+      <ModuleInclude Filename="include/traynotifier.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../common/typedefinition.xsd">
+
+<Module Name="gtkwidget-analogdisplay" Vendor="TU Dresden" Comment="GTK widgets for analog value visualization">
+
+	<!-- FillLevelDisplay -->
+	<Type Name="sarturis::gtk::FillLevelDisplay">
+		<Base Type="sarturis::Updateable"/>
+		<Base Type="sarturis::gtk::Widget"/>
+		<Attribute Name="MinValue" Type="double"/>
+		<Attribute Name="MaxValue" Type="double"/>
+		<Attribute Name="Steps" Type="integer"/>
+		<Attribute Name="Caption" Type="string"/>
+		<Reference Name="FillLevel">
+			<Instance Type="sarturis::AnalogInput"/>
+		</Reference>
+	</Type>
+
+	<!-- CircularDisplay -->
+	<Type Name="sarturis::gtk::CircularDisplay">
+		<Base Type="sarturis::Updateable"/>
+		<Base Type="sarturis::gtk::Widget"/>
+		<Attribute Name="MinValue" Type="double"/>
+		<Attribute Name="MaxValue" Type="double"/>
+		<Attribute Name="Expansion" Type="double"/>
+		<Attribute Name="Steps" Type="double"/>
+		<Attribute Name="Caption" Type="string"/>
+		<Reference Name="Value">
+			<Instance Type="sarturis::AnalogInput"/>
+		</Reference>
+	</Type>
+
+	<CodeGeneration>
+		<ModuleInclude Filename="include/cairowidget.h"/>
+		<ModuleInclude Filename="include/fillleveldisplay.h"/>
+		<ModuleInclude Filename="include/circulardisplay.h"/>
+	</CodeGeneration>
+</Module>
+</TypeDefinition>

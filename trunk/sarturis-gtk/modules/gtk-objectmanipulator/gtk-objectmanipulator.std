@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../../sarturis/common/typedefinition.xsd">
+
+  <Module Name="gtk-objectmanipulator" Vendor="Timo Penndorf">
+
+    <!-- ObjectManipulator -->
+    <Type Name="sarturis::gtk::ObjectManipulator" Comment="Widget for changing attributes and distribution over the network">
+      <Base Type="sarturis::gtk::Widget"/>
+      <Base Type="sarturis::data::ObjectReader"/>
+      <Base Type="sarturis::data::ObjectWriter"/>
+    </Type>
+
+    <CodeGeneration>
+      <!-- Includes -->
+      <ModuleInclude Filename="include/objectmanipulator.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
+

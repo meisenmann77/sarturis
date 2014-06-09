@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../common/typedefinition.xsd">
+
+  <Module Name="terrain-heightmap" Vendor="TU Dresden">
+
+    <!-- HeightmapTerrain -->
+    <Type Name="sarturis::HeightmapTerrain">
+      <Base Type="sarturis::TerrainGeometry"/>
+      <Attribute Name="Filename" Type="string"/>
+      <Attribute Name="Min" Type="string"/>
+      <Attribute Name="Max" Type="string"/>
+      <Attribute Name="Mue" Type="double" Default="1"/>
+    </Type>
+
+    <CodeGeneration>
+      <ModuleInclude Filename="include/mapterrain.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>

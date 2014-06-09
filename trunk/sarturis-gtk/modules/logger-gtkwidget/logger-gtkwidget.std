@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../common/typedefinition.xsd">
+
+  <Module Name="logger-gtkwidget" Vendor="TU Dresden">
+
+    <!-- LoggerWidget -->
+    <Type Name="sarturis::gtk::LoggerWidget">
+      <Base Type="sarturis::gtk::Widget"/>
+    </Type>
+
+    <CodeGeneration>
+      <ModuleInclude Filename="include/loggerwidget.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
+
