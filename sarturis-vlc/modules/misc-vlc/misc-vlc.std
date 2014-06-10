@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../../sarturis/common/typedefinition.xsd">
+
+  <Module Name="misc-vlc" Vendor="Timo Penndorf" Comment="VLC support for Sarturis">
+
+    <!-- MediaSource -->
+    <Interface Name="sarturis::vlc::MediaSource" Comment="Interface for media sources"/>
+
+    <!-- MediaFile -->
+    <Type Name="sarturis::vlc::MediaFile" Comment="Media from a file">
+      <Base Type="sarturis::vlc::MediaSource"/>
+      <Attribute Name="Filename" Type="string"/>
+    </Type>
+
+    <!-- Camera -->
+    <Type Name="sarturis::vlc::Camera" Comment="Camera input">
+      <Base Type="sarturis::vlc::MediaSource"/>
+      <Attribute Name="Device" Type="string" Default="__EMPTY__"/>
+    </Type>
+
+    <!-- UdpStream -->
+    <Type Name="sarturis::vlc::UdpStream" Comment="UDP network stream from VLC">
+      <Base Type="sarturis::vlc::MediaSource"/>
+      <Attribute Name="Host" Type="string"/>
+      <Attribute Name="Port" Type="integer" Default="0"/>
+    </Type>
+
+    <!-- HttpStream -->
+    <Type Name="sarturis::vlc::HttpStream" Comment="UDP network stream from VLC">
+      <Base Type="sarturis::vlc::MediaSource"/>
+      <Attribute Name="Host" Type="string"/>
+      <Attribute Name="Port" Type="integer" Default="0"/>
+      <Configuration Name="Proxy" Min="0" Max="1">
+        <Attribute Name="Host" Type="string"/>
+        <Attribute Name="Port" Type="integer" Default="0"/>
+        <Attribute Name="User" Type="string" Default="__EMPTY__"/>
+        <Attribute Name="Password" Type="string" Default="__EMPTY__"/>
+      </Configuration>
+    </Type>
+
+    <!-- GenericSource -->
+    <Type Name="sarturis::vlc::GenericSource" Comment="Generic input, provide the URL">
+      <Base Type="sarturis::vlc::MediaSource"/>
+      <Attribute Name="Location" Type="string"/>
+    </Type>
+
+    <!-- Viewer -->
+    <Type Name="sarturis::vlc::gtk::Viewer" Comment="Widget displaying vlc content">
+
+      <!-- Interfaces und Attribute -->
+      <Base Type="sarturis::gtk::Widget"/>
+      <Reference Name="Media">
+        <Instance Type="sarturis::vlc::MediaSource"/>
+      </Reference>
+    </Type>
+
+    <CodeGeneration>
+      <ModuleInclude Filename="include/camera.h"/>
+      <ModuleInclude Filename="include/genericsource.h"/>
+      <ModuleInclude Filename="include/mediafile.h"/>
+      <ModuleInclude Filename="include/udpstream.h"/>
+      <ModuleInclude Filename="include/httpstream.h"/>
+      <ModuleInclude Filename="include/viewer.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
+
