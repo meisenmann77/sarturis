@@ -26,13 +26,6 @@ SET(gtkwidget-simgraph_headers include/drawedwidget.h
 MODULE(gtkwidget-simgraph ${gtkwidget-simgraph_sources} ${gtkwidget-simgraph_headers})
 TARGET_LINK_LIBRARIES(gtkwidget-simgraph sarturisbase sarturisgtk ${GTK_LIBRARIES})
 
-# Install Demo
-INSTALL(FILES config/diagramm.xml 
-        DESTINATION share/sarturis/examples/gtkwidget-simgraph
-		COMPONENT sarturis_Examples)
-		
-# Tests
-TEST(Test_sarturis_gtkwidget-simgraph config/diagramm.xml)		
-
 # Doku
 MODULE_DOC(gtkwidget-simgraph)
+
