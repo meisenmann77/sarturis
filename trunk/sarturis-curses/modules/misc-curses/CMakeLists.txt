@@ -18,6 +18,3 @@ SET(misc-curses_headers include/bardrawer.h
 # Modul
 MODULE(misc-curses ${misc-curses_sources} ${misc-curses_headers})
 TARGET_LINK_LIBRARIES(misc-curses sarturiscurses ${CURSESLIB})
-
-# Install Demo
-INSTALL(FILES test.xml DESTINATION share/sarturis/examples/curses)
