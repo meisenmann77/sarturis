@@ -21,8 +21,6 @@
 
 
 import os
-import shlex
-from subprocess import Popen, PIPE
 
 
 class Executor(object):
@@ -31,14 +29,8 @@ class Executor(object):
 
 
   def execute(self, cmd, arg, dir):
-    print '%s%s' % (cmd, arg)
-    print ''
-
-    _exe = shlex.split('%s%s' % (cmd, arg))
     _cwd = os.getcwd()
     os.chdir(dir)
-    _prc = Popen(_exe, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    _out, _err = _prc.communicate()
+    os.system('%s%s' % (cmd, arg))
     os.chdir(_cwd)
 
-    return (_out.rstrip().strip(), _err.rstrip().strip())
