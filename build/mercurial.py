@@ -21,7 +21,6 @@
 
 
 from executor import Executor
-import subprocess
 import os
 
 
@@ -37,13 +36,11 @@ class Mercurial(Executor):
     if changeset is not None:
       _cng = ' --rev %s' % changeset
 
-    _out, _err = self.execute('hg', ' update%s' % _cng, self.repodir)
-    return _out
+    self.execute('hg', ' update%s' % _cng, self.repodir)
 
 
   def changeset(self):
-    _out, _err = self.execute('hg', ' identify --num', self.repodir)
-    return _out
+    self.execute('hg', ' identify --num', self.repodir)
   
 
   def clone(self, src, update = True):
@@ -53,5 +50,5 @@ class Mercurial(Executor):
     if not update:
       _up += '--noupdate'
     
-    _out, _err = self.execute('hg', ' clone%s %s %s' % (_up, src, _d1), _d0)
-    return _out
+    self.execute('hg', ' clone%s %s %s' % (_up, src, _d1), _d0)
+

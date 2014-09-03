@@ -64,12 +64,12 @@ class Builder(object):
 
   def clone(self):
       _hg = Mercurial(self.srcdir)
-      print _hg.clone(self.repodir)
+      _hg.clone(self.repodir)
 
 
   def update(self):
       _hg = Mercurial(self.srcdir)
-      print _hg.update()
+      _hg.update()
 
 
   def install(self):
@@ -78,6 +78,6 @@ class Builder(object):
       _cm.options.string('SARTURIS_MODULE_VERSION_MAJOR', self.version[0])
       _cm.options.string('SARTURIS_MODULE_VERSION_MINOR', self.version[1])
       _cm.options.string('SARTURIS_MODULE_VERSION_PATCH', self.version[2])      
-      print _cm.configure()
-      print _cm.make()
-      print _cm.install()
+      _cm.configure()
+      _cm.make()
+      _cm.install()
