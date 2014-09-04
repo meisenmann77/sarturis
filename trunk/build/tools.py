@@ -20,6 +20,9 @@
 '''
 
 
-from project import Project
-from tools import find_exe
+import os
+
+def find_exe(name):
+  _exe = os.popen('which %s' % name).read().strip()
+  return os.path.realpath(_exe)
 
