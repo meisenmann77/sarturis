@@ -37,10 +37,13 @@ class Builder(object):
     self.repodir    = os.path.join(repodir, package)
     self.version    = version
 
-  def build(self, first = True):
+  def build(self, first = None):
     print self.package
     print '---------------------'
     print ''
+
+    if first is None:
+      first = not os.path.isdir(self.srcdir)
 
     if first:
       self.make_dirs()
