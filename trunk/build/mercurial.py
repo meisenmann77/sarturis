@@ -40,8 +40,9 @@ class Mercurial(Executor):
 
 
   def changeset(self):
-    self.execute('hg', ' identify --num', self.repodir)
-  
+    _out, _err = self.execute_return('hg', ' identify --num', self.repodir)
+    return _out
+
 
   def clone(self, src, update = True):
     _d0, _d1 = os.path.split(self.repodir)
