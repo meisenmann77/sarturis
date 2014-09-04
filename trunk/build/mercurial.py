@@ -39,6 +39,14 @@ class Mercurial(Executor):
     self.execute('hg', ' update%s' % _cng, self.repodir)
 
 
+  def pull(self, update = True):
+    _arg = ' pull'
+    if update:
+      _arg += ' --update'
+
+    self.execute('hg', _arg, self.repodir)
+
+
   def changeset(self):
     _out, _err = self.execute_return('hg', ' identify --num', self.repodir)
     return _out

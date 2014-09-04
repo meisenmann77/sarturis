@@ -49,7 +49,7 @@ class Builder(object):
       self.make_dirs()
       self.clone()
     else:
-      self.update()
+      self.pull()
 
     self.install()
 
@@ -71,9 +71,9 @@ class Builder(object):
       _hg.clone(self.repodir)
 
 
-  def update(self):
+  def pull(self):
       _hg = Mercurial(self.srcdir)
-      _hg.update()
+      _hg.pull()
 
 
   def install(self):
