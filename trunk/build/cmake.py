@@ -26,7 +26,7 @@ from multiprocessing import cpu_count
 
 
 class CMake(Executor):
-  def __init__(self, srcdir, prefix, builddir ='.', buildtype = 'Release', nodev = False):
+  def __init__(self, srcdir, prefix, builddir ='.', buildtype = 'Release', nodev = False, options = Options()):
     Executor.__init__(self)
 
     self.srcdir    = srcdir
@@ -34,8 +34,7 @@ class CMake(Executor):
     self.builddir  = builddir
     self.buildtype = buildtype
     self.nodev     = nodev
-
-    self.options  = Options()
+    self.options   = options
 
 
   def configure(self):
