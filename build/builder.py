@@ -23,6 +23,7 @@
 import os
 from mercurial import Mercurial
 from cmake import CMake
+from rpmbuilder import RPMBuilder
 
 
 class Builder(object):
@@ -81,3 +82,10 @@ class Builder(object):
       _cm.configure()
       _cm.make()
       _cm.install()
+
+
+  def createRPM(self):
+      _hg = Mercurial(self.srcdir)
+      _rb = RPMBuilder(self.package, self.version, _hg.changeset(), self.srcdir, self.builddir , self.installdir)
+      _rb.build()
+
