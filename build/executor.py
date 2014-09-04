@@ -21,6 +21,8 @@
 
 
 import os
+import shlex
+from subprocess import Popen, PIPE
 
 
 class Executor(object):
@@ -33,4 +35,15 @@ class Executor(object):
     os.chdir(dir)
     os.system('%s%s' % (cmd, arg))
     os.chdir(_cwd)
+
+
+  def execute_return(self, cmd, arg, dir):
+    _exe = shlex.split('%s%s' % (cmd, arg))
+    _cwd = os.getcwd()
+    os.chdir(dir)
+    _prc = Popen(_exe, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    _out, _err = _prc.communicate()
+    os.chdir(_cwd)
+
+    return (_out.rstrip().strip(), _err.rstrip().strip())
 
