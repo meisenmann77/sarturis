@@ -24,10 +24,11 @@ import os
 from mercurial import Mercurial
 from cmake import CMake
 from rpmbuilder import RPMBuilder
+from options import Options
 
 
 class Builder(object):
-  def __init__(self, package, srcdir, repodir, version):
+  def __init__(self, package, srcdir, repodir, version, options = Options()):
     object.__init__(self)
 
     self.package    = package
@@ -36,6 +37,7 @@ class Builder(object):
     self.installdir = os.path.join(srcdir, 'install')
     self.repodir    = os.path.join(repodir, package)
     self.version    = version
+    self.options    = options
 
   def build(self, first = None):
     print self.package
@@ -77,7 +79,7 @@ class Builder(object):
 
 
   def install(self):
-      _cm = CMake(self.srcdir, self.installdir, self.builddir)
+      _cm = CMake(self.srcdir, self.installdir, self.builddir, options = self.options)
       _cm.options.path('SARTURIS_PREFIX', self.installdir)
       _cm.options.string('SARTURIS_MODULE_VERSION_MAJOR', self.version[0])
       _cm.options.string('SARTURIS_MODULE_VERSION_MINOR', self.version[1])

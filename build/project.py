@@ -53,10 +53,10 @@ class Project(object):
 
   def build(self):
     for _pkg in self.packages:
-      b = Builder(_pkg, self.builddir, self.repository, self.version)
+      b = Builder(_pkg, self.builddir, self.repository, self.version, self.options[_pkg])
       b.build()
 
     for _pkg in self.packages:
-      b = Builder(_pkg, self.builddir, self.repository, self.version)
+      b = Builder(_pkg, self.builddir, self.repository, self.version, self.options[_pkg])
       b.createRPM()
 
