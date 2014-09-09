@@ -34,58 +34,7 @@ OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
   // Double-Buffered einstellen
   gtk_widget_set_double_buffered(widget,FALSE);
 
-  #ifdef WIN32
-	  // get the device context (DC)
-	  dc=GetDC((HWND)GDK_WINDOW_HWND(widget->window));
-
-    // Pixel-Format
-  	PIXELFORMATDESCRIPTOR pfd;
-	  ZeroMemory(&pfd,sizeof(pfd));
-	  pfd.nSize=sizeof(pfd);
-	  pfd.nVersion=1;
-	  pfd.dwFlags=PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-	  pfd.iPixelType=PFD_TYPE_RGBA;
-	  pfd.cColorBits=24;
-	  pfd.cDepthBits=16;
-	  pfd.iLayerType=PFD_MAIN_PLANE;
-
-	  // set the pixel format for the DC
-	  int format=ChoosePixelFormat(dc,&pfd);
-	  SetPixelFormat(dc,format,&pfd);
-	
-	  // create and enable the render context (RC)
-	  context=wglCreateContext(dc);
-  #else
-    // Attribute
-    int attributes[]={GLX_USE_GL, GLX_DOUBLEBUFFER, GLX_RGBA, None};
-
-    // Display, Window und Screen
-    #ifdef SARTURIS_GTK2
-      display=GDK_DRAWABLE_XDISPLAY(widget->window);
-      glwindow=gdk_x11_drawable_get_xid(widget->window);
-  	  GdkScreen* gscreen=gdk_drawable_get_screen(widget->window);
-  	  int screen=gdk_x11_screen_get_screen_number(gscreen);
-    #else
-      display=GDK_WINDOW_XDISPLAY(gtk_widget_get_window(widget));
-      glwindow=GDK_WINDOW_XID(gtk_widget_get_window(widget));
-  	  GdkScreen* gscreen=gdk_window_get_screen(gtk_widget_get_window(widget));
-  	  int screen=gdk_x11_screen_get_screen_number(gscreen);
-    #endif
-    
-    // screen und VisualInfo
-    XVisualInfo* vinfo=glXChooseVisual(display,screen,attributes);
-
-    // Fallback ohne DoubleBuffer und RGBA
-    if (!vinfo)
-    {
-      int _attributes[]={None};
-      vinfo=glXChooseVisual(display,screen,_attributes);
-      if (!vinfo) throw GeneralException("Couldn't find GLX visual!");
-    }
-
-    // Kontext
-    context=glXCreateContext(display,vinfo,NULL,True);
-  #endif
+  /* TODO: Implement me */
 }
 /******************************************************************************/
 
@@ -94,11 +43,7 @@ OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
 OpenGLContext::~OpenGLContext()
 /******************************************************************************/
 {
-  #ifdef WIN32
-    wglDeleteContext(context);
-  #else
-    glXDestroyContext(display,context);
-  #endif
+  /* TODO: Implement me */
 }
 /******************************************************************************/
 
@@ -110,12 +55,7 @@ bool OpenGLContext::MakeCurrent()
   // Context muss da sein
   if (!context) return false;
 
-  // Context aktivieren
-  #ifdef WIN32
-    return (wglMakeCurrent(dc,context)==(BOOL)TRUE);
-  #else
-    return (glXMakeCurrent(display,glwindow,context)==True);
-  #endif
+  /* TODO: Implement me */
 }
 /******************************************************************************/
 
@@ -124,10 +64,6 @@ bool OpenGLContext::MakeCurrent()
 void OpenGLContext::SwapBuffers()
 /******************************************************************************/
 {
-  #ifdef WIN32
-    ::SwapBuffers(dc);
-  #else
-    glXSwapBuffers(display,glwindow);
-  #endif
+  /* TODO: Implement me */
 }
 /******************************************************************************/
