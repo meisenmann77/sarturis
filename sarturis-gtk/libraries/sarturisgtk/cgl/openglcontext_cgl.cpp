@@ -22,7 +22,7 @@
 
 #include <gdk/gdk.h>
 #include "sarturis/base/generalexception.h"
-#include "sarturis/gtk/openglcontext.h"
+#include "sarturis/gtk/cgl/openglcontext_cgl.h"
 using namespace sarturis;
 using namespace sarturis::gtk;
 
