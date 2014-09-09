@@ -65,11 +65,6 @@ ENDIF(GTK_VERSION_GTK2)
 SHARED_LIBRARY(sarturisgtk ${sarturisgtk_sources} ${sarturisgtk_headers} ${compat_sources} ${platform_sources} ${platform_headers})
 TARGET_LINK_LIBRARIES(sarturisgtk sarturisapps sarturisconfig sarturisbase ${GTK_LIBRARIES} ${platform_libs})
 
-# Zusaetzlich beim build
-ADD_CUSTOM_TARGET(SARTURIS_GTK_OGL_BUILD DEPENDS ${CMAKE_BINARY_DIR}/include/sarturis/gtk/openglcontext.h
-                                                 ${CMAKE_BINARY_DIR}/include/sarturis/gtk/${platform_include})
-ADD_DEPENDENCIES(sarturisgtk SARTURIS_GTK_OGL_BUILD)
-
 # Testanwendung (linkt nicht unter cygwin)
 IF(NOT SARTURIS_CYGWIN)
   TEST_APP(sarturisgtk-test test.cpp)
@@ -93,6 +88,12 @@ ENDIF(SARTURIS_APPLE)
 IF(SARTURIS_WIN32)
   HEADER_INSTALL(gtk/wgl ${platform_headers})
 ENDIF(SARTURIS_WIN32)
+
+# Zusaetzlich beim build
+INSTALL_FILE(${CMAKE_BINARY_DIR}/include/sarturis/gtk/${platform_include} ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/${platform_include})
+ADD_CUSTOM_TARGET(SARTURIS_GTK_OGL_BUILD DEPENDS ${CMAKE_BINARY_DIR}/include/sarturis/gtk/openglcontext.h
+                                                 ${CMAKE_BINARY_DIR}/include/sarturis/gtk/${platform_include})
+ADD_DEPENDENCIES(sarturisgtk SARTURIS_GTK_OGL_BUILD)
 
 # Typdefinition
 INTERFACEDEF(gtk)
