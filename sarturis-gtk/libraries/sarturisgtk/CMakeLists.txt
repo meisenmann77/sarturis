@@ -90,10 +90,11 @@ IF(SARTURIS_WIN32)
 ENDIF(SARTURIS_WIN32)
 
 # Zusaetzlich beim build
-INSTALL_FILE(${CMAKE_BINARY_DIR}/include/sarturis/gtk/${platform_include} ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/${platform_include})
-ADD_CUSTOM_TARGET(SARTURIS_GTK_OGL_BUILD DEPENDS ${CMAKE_BINARY_DIR}/include/sarturis/gtk/openglcontext.h
-                                                 ${CMAKE_BINARY_DIR}/include/sarturis/gtk/${platform_include})
-ADD_DEPENDENCIES(sarturisgtk SARTURIS_GTK_OGL_BUILD)
+INSTALL_FILE(${CMAKE_BINARY_DIR}/xinclude/sarturis/gtk/${platform_include} ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/${platform_include})
+INSTALL_FILE(${CMAKE_BINARY_DIR}/xinclude/sarturis/gtk/openglcontext.h ${CMAKE_CURRENT_BINARY_DIR}/openglcontext.h)
+ADD_CUSTOM_TARGET(SARTURIS_GTK_XINCLUDE DEPENDS ${CMAKE_BINARY_DIR}/xinclude/sarturis/gtk/openglcontext.h
+                                                 ${CMAKE_BINARY_DIR}/xinclude/sarturis/gtk/${platform_include})
+ADD_DEPENDENCIES(sarturisgtk SARTURIS_GTK_XINCLUDE)
 
 # Typdefinition
 INTERFACEDEF(gtk)
