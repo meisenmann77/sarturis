@@ -23,18 +23,13 @@
 #ifndef __SARTURIS_GTK_OPENGLCONTEXT__
 #define __SARTURIS_GTK_OPENGLCONTEXT__
 
-#ifdef WIN32
-  #include <gdk/gdkwin32.h>
-  #include <windows.h>
-#else
-  #include <gdk/gdkx.h>
-  #include <GL/glx.h>
-#endif
+#include <gdk/gdkwin32.h>
+#include <windows.h>
 #include <gtk/gtk.h>
 
 #include "sarturis/base/referenced.h"
-#include "export.h"
-#include "base.h"
+#include "sarturis/gtk/export.h"
+#include "sarturis/gtk/base.h"
 
 /******************************************************************************/
 namespace sarturis
@@ -59,15 +54,9 @@ namespace sarturis
         // Widget
         GtkWidget* widget;
 
-        // Plattform-Zeugs
-        #ifdef WIN32
-          HDC dc;
-          HGLRC context;
-        #else
-          ::Display* display;
-          GLXDrawable glwindow;
-          GLXContext context;
-        #endif
+        // Kontext-Zeugs
+        HDC dc;
+        HGLRC context;
     };
   }
 }
