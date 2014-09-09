@@ -12,8 +12,7 @@ SET(sarturisgtk_sources base.cpp
                         activewidget.cpp
                         window.cpp
                         emptycursor.cpp
-                        application.cpp
-                        openglcontext.cpp)
+                        application.cpp)
 SET(sarturisgtk_headers ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/export.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/base.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/compat.h
@@ -22,15 +21,29 @@ SET(sarturisgtk_headers ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/export.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/activewidget.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/window.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/emptycursor.h
-                        ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/application.h
-                        ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/openglcontext.h)
+                        ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/application.h)
 
 # OpenGL
-IF(WIN32)
-  SET(ogl_lib OpenGL32)
-ELSE(WIN32)
-  SET(ogl_lib GL)
-ENDIF(WIN32)
+IF(SARTURIS_CYGWIN)
+  SET(platform_sources glx/openglcontext_glx.cpp)  
+  SET(platform_libs GL)
+  ADD_DEFINITIONS('-DOPENGL_CONTEXT_GLX')
+ENDIF(SARTURIS_CYGWIN)
+IF(SARTURIS_LINUX)
+  SET(platform_sources glx/openglcontext_glx.cpp)  
+  SET(platform_libs GL)
+  ADD_DEFINITIONS('-DOPENGL_CONTEXT_GLX')
+ENDIF(SARTURIS_LINUX)
+IF(SARTURIS_APPLE)
+  SET(platform_sources cgl/openglcontext_cgl.cpp)  
+  SET(platfrom_libs GL)
+  ADD_DEFINITIONS('-DOPENGL_CONTEXT_CGL')
+ENDIF(SARTURIS_APPLE)
+IF(SARTURIS_WIN32)
+  SET(platform_sources wgl/openglcontext_wgl.cpp)  
+  SET(platform_libs OpenGL32)
+  ADD_DEFINITIONS('-DOPENGL_CONTEXT_WGL')
+ENDIF(SARTURIS_WIN32)
 
 # Kompatibilitaets-Wrapper
 IF(GTK_VERSION_GTK3)
@@ -41,8 +54,8 @@ IF(GTK_VERSION_GTK2)
 ENDIF(GTK_VERSION_GTK2)
 
 # Bibliothek
-SHARED_LIBRARY(sarturisgtk ${sarturisgtk_sources} ${sarturisgtk_headers} ${compat_sources})
-TARGET_LINK_LIBRARIES(sarturisgtk sarturisapps sarturisconfig sarturisbase ${GTK_LIBRARIES} ${ogl_lib})
+SHARED_LIBRARY(sarturisgtk ${sarturisgtk_sources} ${sarturisgtk_headers} ${compat_sources} ${platform_sources})
+TARGET_LINK_LIBRARIES(sarturisgtk sarturisapps sarturisconfig sarturisbase ${GTK_LIBRARIES} ${platform_libs})
 
 # Testanwendung (linkt nicht unter cygwin)
 IF(NOT SARTURIS_CYGWIN)
