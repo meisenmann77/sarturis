@@ -27,7 +27,7 @@
   #include <gdk/gdkwin32.h>
   #include <windows.h>
 #else
-  //#include <gdk/gdkx.h>
+  #include <gdk/gdkx.h>
   #include <GL/glx.h>
 #endif
 #include <gtk/gtk.h>
