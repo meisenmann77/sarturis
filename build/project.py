@@ -21,6 +21,7 @@
 
 
 import os
+from copy import deepcopy
 from builder import Builder
 from options import Options
 
@@ -32,6 +33,7 @@ class Project(object):
     self.version  = version
     self.packages = []
     self.options  = {}
+    self.deps     = {}
 
     self.builddir = builddir
     if self.builddir is None:
@@ -45,18 +47,49 @@ class Project(object):
   def package(self, pkg):
     self.packages.append(pkg)
     self.options[pkg] = Options()
+    self.deps[pkg]    = []
+
+
+  def depend(self, name, *obj):
+    for _o in obj:
+      self.deps[name].append(_o)
 
 
   def option(self, pkg):
     return self.options[pkg]
 
 
+  def order(self):
+    _list = []
+    _work = deepcopy(self.packages)
+
+    while len(_work) > 0:
+      _l1 = len(_list)
+      for _k in _work:
+        _use = True
+        for _dep in self.deps[_k]:
+          if not _dep in _list:
+            _use = False
+
+        if _use:
+          _list.append(_k)
+          _work.remove(_k)
+
+      if len(_list) == _l1:
+        print 'Keine Aufloesung'
+        break
+
+    return _list
+
+
   def build(self):
-    for _pkg in self.packages:
+    _plist = self.order()
+
+    for _pkg in _plist:
       b = Builder(_pkg, self.builddir, self.repository, self.version, self.options[_pkg])
       b.build()
 
-    for _pkg in self.packages:
+    for _pkg in _plist:
       b = Builder(_pkg, self.builddir, self.repository, self.version, self.options[_pkg])
       b.createRPM()
 
