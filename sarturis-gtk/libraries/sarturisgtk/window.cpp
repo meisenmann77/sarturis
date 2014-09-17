@@ -111,12 +111,12 @@ void Window::SetScreen(int Screen)
   // GdkDisplay
   GdkDisplay* d=gdk_screen_get_display(s);
 
-  // Pruefung der Screen-Anzahl
-  if( Screen >= gdk_display_get_n_screens(d) )
-    throw GeneralException("Could not find Screen "+str(Screen));
-
   // neuer GdkScreen
   GdkScreen* sn=gdk_display_get_screen(d,Screen);
+
+  // Pruefung
+  if (!GDK_IS_SCREEN(sn))
+    throw GeneralException("Could not find Screen "+str(Screen));
 
   // setzen
   gtk_window_set_screen(GTK_WINDOW(window),sn);

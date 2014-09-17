@@ -127,9 +127,9 @@ std::string Base::LoadDialog(const std::string& Caption,
   // Datei-Dialog anlegen
   GtkWidget* d=gtk_file_chooser_dialog_new(Caption.c_str(),NULL,
                                            GTK_FILE_CHOOSER_ACTION_OPEN,
-                                           GTK_STOCK_CANCEL,
+                                           "_Cancel",
                                            GTK_RESPONSE_CANCEL,
-                                           GTK_STOCK_OPEN,
+                                           "_Open",
                                            GTK_RESPONSE_ACCEPT,
                                            NULL);
   gtk_window_set_position(GTK_WINDOW(d),GTK_WIN_POS_CENTER);
@@ -160,9 +160,9 @@ std::string Base::SaveDialog(const std::string& Caption,
   // Dialog aufbauen
   GtkWidget* d=gtk_file_chooser_dialog_new(Caption.c_str(),NULL,
                                            GTK_FILE_CHOOSER_ACTION_SAVE,
-                                           GTK_STOCK_CANCEL,
+                                           "_Cancel",
                                            GTK_RESPONSE_CANCEL,
-                                           GTK_STOCK_SAVE,
+                                           "_Save",
                                            GTK_RESPONSE_ACCEPT,
                                            NULL);
   gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(d),TRUE);
