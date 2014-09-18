@@ -22,36 +22,30 @@ SET(sarturisgtk_headers ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/export.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/activewidget.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/window.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/emptycursor.h
+                        ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/openglcontext.h
                         ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/application.h)
 
 # OpenGL
 IF(SARTURIS_CYGWIN)
   SET(platform_sources glx/openglcontext_glx.cpp)  
-  SET(platform_include glx/openglcontext_glx.h)
-  SET(platform_headers ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/${platform_include})
+  SET(platform_headers glx/openglcontext_glx.h)
   SET(platform_libs GL)
 ENDIF(SARTURIS_CYGWIN)
 IF(SARTURIS_LINUX)
   SET(platform_sources glx/openglcontext_glx.cpp)  
-  SET(platform_include glx/openglcontext_glx.h)
-  SET(platform_headers ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/${platform_include})
+  SET(platform_headers glx/openglcontext_glx.h)
   SET(platform_libs GL)
 ENDIF(SARTURIS_LINUX)
 IF(SARTURIS_APPLE)
   SET(platform_sources cgl/openglcontext_cgl.mm)  
-  SET(platform_include cgl/openglcontext_cgl.h)
-  SET(platform_headers ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/${platform_include})
+  SET(platform_headers cgl/openglcontext_cgl.h)
   SET(platform_libs "-framework OpenGL -framework Cocoa")
 ENDIF(SARTURIS_APPLE)
 IF(SARTURIS_WIN32)
   SET(platform_sources wgl/openglcontext_wgl.cpp)  
-  SET(platform_include wgl/openglcontext_wgl.h)
-  SET(platform_headers ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/${platform_include})
+  SET(platform_headers wgl/openglcontext_wgl.h)
   SET(platform_libs OpenGL32)
 ENDIF(SARTURIS_WIN32)
-
-# openglcontext.h erzeugen
-CONFIGURE_FILE(${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/openglcontext.h.in ${CMAKE_CURRENT_BINARY_DIR}/openglcontext.h)
 
 # Kompatibilitaets-Wrapper
 IF(GTK_VERSION_GTK3)
@@ -73,28 +67,6 @@ ENDIF(NOT SARTURIS_CYGWIN)
 
 # Header-Install
 HEADER_INSTALL(gtk ${sarturisgtk_headers})
-INSTALL_FILE(${CMAKE_BINARY_DIR}/include/sarturis/gtk/openglcontext.h ${CMAKE_CURRENT_BINARY_DIR}/openglcontext.h)
-ADD_CUSTOM_TARGET(SARTURIS_GTK_OGLCTXT DEPENDS ${CMAKE_BINARY_DIR}/include/sarturis/gtk/openglcontext.h)
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/openglcontext.h DESTINATION include/sarturis/gtk)
-IF(SARTURIS_CYGWIN)
-  HEADER_INSTALL(gtk/glx ${platform_headers})
-ENDIF(SARTURIS_CYGWIN)
-IF(SARTURIS_LINUX)
-  HEADER_INSTALL(gtk/glx ${platform_headers})
-ENDIF(SARTURIS_LINUX)
-IF(SARTURIS_APPLE)
-  HEADER_INSTALL(gtk/cgl ${platform_headers})
-ENDIF(SARTURIS_APPLE)
-IF(SARTURIS_WIN32)
-  HEADER_INSTALL(gtk/wgl ${platform_headers})
-ENDIF(SARTURIS_WIN32)
-
-# Zusaetzlich beim build
-INSTALL_FILE(${CMAKE_BINARY_DIR}/xinclude/sarturis/gtk/${platform_include} ${SARTURIS_GTK_INCLUDE_DIR}/sarturis/gtk/${platform_include})
-INSTALL_FILE(${CMAKE_BINARY_DIR}/xinclude/sarturis/gtk/openglcontext.h ${CMAKE_CURRENT_BINARY_DIR}/openglcontext.h)
-ADD_CUSTOM_TARGET(SARTURIS_GTK_XINCLUDE DEPENDS ${CMAKE_BINARY_DIR}/xinclude/sarturis/gtk/openglcontext.h
-                                                 ${CMAKE_BINARY_DIR}/xinclude/sarturis/gtk/${platform_include})
-ADD_DEPENDENCIES(sarturisgtk SARTURIS_GTK_XINCLUDE)
 
 # Typdefinition
 INTERFACEDEF(gtk)
