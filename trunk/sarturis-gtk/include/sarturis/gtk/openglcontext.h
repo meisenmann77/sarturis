@@ -23,8 +23,6 @@
 #ifndef __SARTURIS_GTK_OPENGLCONTEXT__
 #define __SARTURIS_GTK_OPENGLCONTEXT__
 
-#include <gdk/gdkwin32.h>
-#include <windows.h>
 #include <gtk/gtk.h>
 
 #include "sarturis/base/referenced.h"
@@ -39,24 +37,16 @@ namespace sarturis
     class DLLIMPORT OpenGLContext : virtual public Referenced, public Base
     {
       public:
-        // Konstruktor
-        OpenGLContext(GtkWidget* Widget);
+        // Je nach Implementierung abgeleitete Instanz erzeugen
+        static sarturis::ref<OpenGLContext> Create(GtkWidget* Widget);
 
         // Aktivieren und Buffer swappen
-        bool MakeCurrent();
-        void SwapBuffers();
+        virtual bool MakeCurrent()=0;
+        virtual void SwapBuffers()=0;
 
       protected:
         // Destruktor
-        ~OpenGLContext();
-
-      private:
-        // Widget
-        GtkWidget* widget;
-
-        // Kontext-Zeugs
-        HDC dc;
-        HGLRC context;
+        virtual ~OpenGLContext() { ; }
     };
   }
 }
