@@ -20,7 +20,10 @@
  ******************************************************************************/
 
 
+#include <OpenGL/gl.h>
 #include <gdk/gdk.h>
+#include <gdk/gdkquartz.h>
+
 #include "sarturis/base/generalexception.h"
 #include "sarturis/gtk/cgl/openglcontext_cgl.h"
 using namespace sarturis;
@@ -35,6 +38,21 @@ OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
   gtk_widget_set_double_buffered(widget,FALSE);
 
   /* TODO: Implement me */
+
+    CGLPixelFormatObj pix; 
+    GLint             npix; 
+    CGLPixelFormatAttribute attribs[] = { 
+        (CGLPixelFormatAttribute) 0
+    }; 
+
+    CGLChoosePixelFormat( attribs, &pix, &npix ); 
+    CGLCreateContext( pix, NULL, &context ); 
+    CGLSetCurrentContext( context ); 
+
+    printf("Vendor:   %s\n", glGetString(GL_VENDOR)                  ); 
+    printf("Renderer: %s\n", glGetString(GL_RENDERER)                ); 
+    printf("Version:  %s\n", glGetString(GL_VERSION)                 ); 
+    printf("GLSL:     %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 }
 /******************************************************************************/
 
@@ -56,6 +74,8 @@ bool OpenGLContext::MakeCurrent()
   if (!context) return false;
 
   /* TODO: Implement me */
+  CGLSetCurrentContext( context );
+  return true;
 }
 /******************************************************************************/
 
@@ -65,5 +85,6 @@ void OpenGLContext::SwapBuffers()
 /******************************************************************************/
 {
   /* TODO: Implement me */
+  CGLFlushDrawable(context);
 }
 /******************************************************************************/
