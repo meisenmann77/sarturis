@@ -24,6 +24,7 @@
 #define __SARTURIS_GTK_OPENGLCONTEXT__
 
 #include <gtk/gtk.h>
+#include <OpenGL/OpenGL.h>
 
 #include "sarturis/base/referenced.h"
 #include "sarturis/gtk/export.h"
@@ -53,9 +54,8 @@ namespace sarturis
         GtkWidget* widget;
 
         // TODO: Implement me
-        void* display;
-        void* glwindow;
-        void* context;
+        void* view;
+        CGLContextObj context;
     };
   }
 }
