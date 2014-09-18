@@ -25,13 +25,22 @@
 #include <gdk/gdkquartz.h>
 
 #include "sarturis/base/generalexception.h"
-#include "sarturis/gtk/cgl/openglcontext_cgl.h"
+#include "openglcontext_cgl.h"
 using namespace sarturis;
 using namespace sarturis::gtk;
 
 
 /******************************************************************************/
-OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
+sarturis::ref<OpenGLContext> OpenGLContext::Create(GtkWidget* Widget)
+/******************************************************************************/
+{
+  return new OpenGLContextCGL(Widget);
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+OpenGLContextCGL::OpenGLContextCGL(GtkWidget* Widget):widget(Widget),context(0)
 /******************************************************************************/
 {
   // Double-Buffered einstellen
@@ -58,7 +67,7 @@ OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
 
 
 /******************************************************************************/
-OpenGLContext::~OpenGLContext()
+OpenGLContextCGL::~OpenGLContextCGL()
 /******************************************************************************/
 {
   /* TODO: Implement me */
@@ -67,7 +76,7 @@ OpenGLContext::~OpenGLContext()
 
 
 /******************************************************************************/
-bool OpenGLContext::MakeCurrent()
+bool OpenGLContextCGL::MakeCurrent()
 /******************************************************************************/
 {
   // Context muss da sein
@@ -81,7 +90,7 @@ bool OpenGLContext::MakeCurrent()
 
 
 /******************************************************************************/
-void OpenGLContext::SwapBuffers()
+void OpenGLContextCGL::SwapBuffers()
 /******************************************************************************/
 {
   /* TODO: Implement me */
