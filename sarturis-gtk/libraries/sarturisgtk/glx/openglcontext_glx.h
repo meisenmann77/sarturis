@@ -20,27 +20,26 @@
  ******************************************************************************/
 
 
-#ifndef __SARTURIS_GTK_OPENGLCONTEXT__
-#define __SARTURIS_GTK_OPENGLCONTEXT__
+#ifndef __SARTURIS_GTK_OPENGLCONTEXTGLX__
+#define __SARTURIS_GTK_OPENGLCONTEXTGLX__
 
 #include <gdk/gdkx.h>
 #include <GL/glx.h>
 #include <gtk/gtk.h>
 
-#include "sarturis/base/referenced.h"
 #include "sarturis/gtk/export.h"
-#include "sarturis/gtk/base.h"
+#include "sarturis/gtk/openglcontext.h"
 
 /******************************************************************************/
 namespace sarturis
 {
   namespace gtk
   {
-    class DLLIMPORT OpenGLContext : virtual public Referenced, public Base
+    class DLLIMPORT OpenGLContextGLX : public OpenGLContext
     {
       public:
         // Konstruktor
-        OpenGLContext(GtkWidget* Widget);
+        OpenGLContextGLX(GtkWidget* Widget);
 
         // Aktivieren und Buffer swappen
         bool MakeCurrent();
@@ -48,7 +47,7 @@ namespace sarturis
 
       protected:
         // Destruktor
-        ~OpenGLContext();
+        ~OpenGLContextGLX();
 
       private:
         // Widget
