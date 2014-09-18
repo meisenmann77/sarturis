@@ -22,13 +22,22 @@
 
 #include <gdk/gdk.h>
 #include "sarturis/base/generalexception.h"
-#include "sarturis/gtk/glx/openglcontext_glx.h"
+#include "openglcontext_glx.h"
 using namespace sarturis;
 using namespace sarturis::gtk;
 
 
 /******************************************************************************/
-OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
+sarturis::ref<OpenGLContext> OpenGLContext::Create(GtkWidget* Widget)
+/******************************************************************************/
+{
+  return new OpenGLContextGLX(Widget);
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+OpenGLContextGLX::OpenGLContextGLX(GtkWidget* Widget):widget(Widget),context(0)
 /******************************************************************************/
 {
   // Double-Buffered einstellen
@@ -61,7 +70,7 @@ OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
 
 
 /******************************************************************************/
-OpenGLContext::~OpenGLContext()
+OpenGLContextGLX::~OpenGLContextGLX()
 /******************************************************************************/
 {
   glXDestroyContext(display,context);
@@ -70,7 +79,7 @@ OpenGLContext::~OpenGLContext()
 
 
 /******************************************************************************/
-bool OpenGLContext::MakeCurrent()
+bool OpenGLContextGLX::MakeCurrent()
 /******************************************************************************/
 {
   // Context muss da sein
@@ -83,7 +92,7 @@ bool OpenGLContext::MakeCurrent()
 
 
 /******************************************************************************/
-void OpenGLContext::SwapBuffers()
+void OpenGLContextGLX::SwapBuffers()
 /******************************************************************************/
 {
   glXSwapBuffers(display,glwindow);
