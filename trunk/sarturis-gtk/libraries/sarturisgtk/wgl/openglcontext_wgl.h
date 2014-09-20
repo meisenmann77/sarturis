@@ -42,6 +42,9 @@ namespace sarturis
         // Konstruktor
         OpenGLContext(GtkWidget* Widget);
 
+        // Fensterkoordinaten aktualisierten
+        void Update(GtkAllocation A);
+
         // Aktivieren und Buffer swappen
         bool MakeCurrent();
         void SwapBuffers();
