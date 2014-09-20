@@ -40,28 +40,26 @@ sarturis::ref<OpenGLContext> OpenGLContext::Create(GtkWidget* Widget)
 
 
 /******************************************************************************/
-OpenGLContextCGL::OpenGLContextCGL(GtkWidget* Widget):widget(Widget),context(0)
+OpenGLContextCGL::OpenGLContextCGL(GtkWidget* Widget):ctxt(0),view(0)
 /******************************************************************************/
 {
-  // Double-Buffered einstellen
-  gtk_widget_set_double_buffered(widget,FALSE);
+  // Pixelformat
+  NSOpenGLPixelFormatAttribute attr[]={NSOpenGLPFAColorSize, 24,
+                                       NSOpenGLPFAAlphaSize,  8,
+                                       NSOpenGLPFADepthSize,  1,
+                                       NSOpenGLPFADoubleBuffer,
+                                       0};
+  NSOpenGLPixelFormat* pf=[[NSOpenGLPixelFormat alloc] initWithAttributes:attr];
 
-  /* TODO: Implement me */
+  // Kontext
+  ctxt=[[NSOpenGLContext alloc] initWithFormat:pf shareContext:nil];
 
-    CGLPixelFormatObj pix; 
-    GLint             npix; 
-    CGLPixelFormatAttribute attribs[] = { 
-        (CGLPixelFormatAttribute) 0
-    }; 
+  // View holen
+  GdkWindow* win=gtk_widget_get_window(Widget);
+  view=gdk_quartz_window_get_nsview(win);
 
-    CGLChoosePixelFormat( attribs, &pix, &npix ); 
-    CGLCreateContext( pix, NULL, &context ); 
-    CGLSetCurrentContext( context ); 
-
-    printf("Vendor:   %s\n", glGetString(GL_VENDOR)                  ); 
-    printf("Renderer: %s\n", glGetString(GL_RENDERER)                ); 
-    printf("Version:  %s\n", glGetString(GL_VERSION)                 ); 
-    printf("GLSL:     %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+  // View und Kontext verbinden
+  [ctxt setView:view];
 }
 /******************************************************************************/
 
@@ -70,7 +68,7 @@ OpenGLContextCGL::OpenGLContextCGL(GtkWidget* Widget):widget(Widget),context(0)
 OpenGLContextCGL::~OpenGLContextCGL()
 /******************************************************************************/
 {
-  /* TODO: Implement me */
+  [ctxt release];
 }
 /******************************************************************************/
 
@@ -79,7 +77,12 @@ OpenGLContextCGL::~OpenGLContextCGL()
 void OpenGLContextCGL::Update(GtkAllocation A)
 /******************************************************************************/
 {
-  /* TODO: Implement me */
+  // Abmessungen setzen
+  NSRect rect=NSMakeRect(A.x,A.y,A.width,A.height);
+  [view setFrame:rect];
+
+  // Kontext aktualisieren und raus
+  [ctxt update]; 
 }
 /******************************************************************************/
 
@@ -88,11 +91,7 @@ void OpenGLContextCGL::Update(GtkAllocation A)
 bool OpenGLContextCGL::MakeCurrent()
 /******************************************************************************/
 {
-  // Context muss da sein
-  if (!context) return false;
-
-  /* TODO: Implement me */
-  CGLSetCurrentContext( context );
+  [ctxt makeCurrentContext];
   return true;
 }
 /******************************************************************************/
@@ -102,7 +101,6 @@ bool OpenGLContextCGL::MakeCurrent()
 void OpenGLContextCGL::SwapBuffers()
 /******************************************************************************/
 {
-  /* TODO: Implement me */
-  CGLFlushDrawable(context);
+  [ctxt flushBuffer];
 }
 /******************************************************************************/

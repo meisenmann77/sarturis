@@ -52,12 +52,9 @@ namespace sarturis
         ~OpenGLContextCGL();
 
       private:
-        // Widget
-        GtkWidget* widget;
-
-        // TODO: Implement me
-        void* view;
-        CGLContextObj context;
+        // Kontext und View
+        NSOpenGLContext* ctxt;
+        NSView* view;
     };
   }
 }
