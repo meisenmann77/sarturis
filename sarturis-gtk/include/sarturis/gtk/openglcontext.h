@@ -40,6 +40,9 @@ namespace sarturis
         // Je nach Implementierung abgeleitete Instanz erzeugen
         static sarturis::ref<OpenGLContext> Create(GtkWidget* Widget);
 
+        // Fensterkoordinaten aktualisierten
+        virtual void Update(GtkAllocation A)=0;
+
         // Aktivieren und Buffer swappen
         virtual bool MakeCurrent()=0;
         virtual void SwapBuffers()=0;
