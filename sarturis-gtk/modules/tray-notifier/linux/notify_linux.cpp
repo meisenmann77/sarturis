@@ -20,36 +20,57 @@
  ******************************************************************************/
 
 
-#include "include/traynotifier.h"
-#include "sarturis.h"
-using namespace sarturis;
+#include "notify_linux.h"
 using namespace sarturis::gtk;
 
 
 /******************************************************************************/
-TrayNotifier::TrayNotifier(sarturis::ref<TextInput> Title,
-                           sarturis::ref<TextInput> Message):
-                title(Title),
-                msg(Message),
-                ntf(Notify::Create(Pixbuf(_sarturis_,sizeof(_sarturis_))))
+sarturis::ref<Notify> Notify::Create(GdkPixbuf* Icon)
 /******************************************************************************/
 {
+  return new NotifyLinux(Icon);
 }
 /******************************************************************************/
 
 
 /******************************************************************************/
-TrayNotifier::~TrayNotifier()
+NotifyLinux::NotifyLinux(GdkPixbuf* Icon):icon(Icon)
 /******************************************************************************/
 {
+  // Init
+  if (cnt==1) notify_init("SARTURIS");
 }
 /******************************************************************************/
 
 
 /******************************************************************************/
-void TrayNotifier::Exec()
+NotifyLinux::~NotifyLinux()
 /******************************************************************************/
 {
-  ntf->Balloon(title->Get(),msg->Get());
+  // Deinit
+//  if (cnt==1) notify_uninit();
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+void NotifyLinux::Balloon(const std::string& Title, const std::string& Info)
+/******************************************************************************/
+{
+  // Notification
+  #if (NOTIFY_VERSION_MINOR < 7)
+    NotifyNotification* n=notify_notification_new(Title.c_str(),Info.c_str(),
+                                                  NULL,NULL);
+  #else
+    NotifyNotification* n=notify_notification_new(Title.c_str(),Info.c_str(),
+                                                  NULL);
+  #endif
+
+  // Bild und Prio setzen  
+  notify_notification_set_icon_from_pixbuf(n,icon);
+  notify_notification_set_urgency(n,NOTIFY_URGENCY_CRITICAL);
+
+  // Anzeigen
+  notify_notification_show(n,NULL);
 }
 /******************************************************************************/

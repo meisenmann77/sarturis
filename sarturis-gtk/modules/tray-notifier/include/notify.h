@@ -23,12 +23,10 @@
 #ifndef __NOTIFY__
 #define __NOTIFY__
 
-#ifdef WIN32
-  #include <windows.h>
-#endif
-
 #include <gdk/gdk.h>
 #include <string>
+
+#include "sarturis/base/referenced.h"
 
 
 /******************************************************************************/
@@ -36,28 +34,23 @@ namespace sarturis
 {
   namespace gtk
   {
-    class Notify
+    class Notify : virtual public Referenced
     {
       public:
-        // Konstruktur und Destruktor
-        Notify(GdkPixbuf* Icon);
-        ~Notify();
+        // Methode zum Erzeugen der Implementierung
+        static sarturis::ref<Notify> Create(GdkPixbuf* Icon);
 
         // Anzeige der Balloon-Nachricht
-        void Balloon(const std::string& Title, const std::string& Info);
+        virtual void Balloon(const std::string& Title,
+                             const std::string& Info)=0;
 
-      private:
+      protected:
+        // Konstruktor und Destruktor
+        Notify();
+        virtual ~Notify();
+
         // Anzahl
         static int cnt;
-
-        #ifdef WIN32
-          // Windows, merke id (generiert aus Anzahl) und Icon
-          int id;
-          HICON icon;
-        #else
-          // Linux, merke Icon anders
-          GdkPixbuf* icon;
-        #endif
     };
   }
 }

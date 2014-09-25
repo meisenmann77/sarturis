@@ -20,57 +20,42 @@
  ******************************************************************************/
 
 
-#include <gtk/gtk.h>
-#include <libnotify/notify.h>
-#include "include/notify.h"
+#include "sarturis/base/logger.h"
+#include "notify_cygwin.h"
+using namespace sarturis;
 using namespace sarturis::gtk;
 
 
 /******************************************************************************/
-int Notify::cnt=0;
-/******************************************************************************/
-
-
-/******************************************************************************/
-Notify::Notify(GdkPixbuf* Icon):icon(Icon)
+sarturis::ref<Notify> Notify::Create(GdkPixbuf* Icon)
 /******************************************************************************/
 {
-  // Init
-  if (!cnt) notify_init("SARTURIS");
-  cnt++;
+  return new NotifyCygwin(Icon);
 }
 /******************************************************************************/
 
 
 /******************************************************************************/
-Notify::~Notify()
+NotifyCygwin::NotifyCygwin(GdkPixbuf* Icon)
 /******************************************************************************/
 {
-  // Deinit
-  --cnt;
-//  if (!cnt) notify_uninit();
 }
 /******************************************************************************/
 
 
 /******************************************************************************/
-void Notify::Balloon(const std::string& Title, const std::string& Info)
+NotifyCygwin::~NotifyCygwin()
 /******************************************************************************/
 {
-  // Notification
-  #if (NOTIFY_VERSION_MINOR < 7)
-    NotifyNotification* n=notify_notification_new(Title.c_str(),Info.c_str(),
-                                                  NULL,NULL);
-  #else
-    NotifyNotification* n=notify_notification_new(Title.c_str(),Info.c_str(),
-                                                  NULL);
-  #endif
+}
+/******************************************************************************/
 
-  // Bild und Prio setzen  
-  notify_notification_set_icon_from_pixbuf(n,icon);
-  notify_notification_set_urgency(n,NOTIFY_URGENCY_CRITICAL);
 
-  // Anzeigen
-  notify_notification_show(n,NULL);
+/******************************************************************************/
+void NotifyCygwin::Balloon(const std::string& Title, const std::string& Info)
+/******************************************************************************/
+{
+  Logger::Warning("No implementation for notifications");
+  Logger::Info(Title+": "+Info);
 }
 /******************************************************************************/

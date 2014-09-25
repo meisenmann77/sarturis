@@ -20,18 +20,23 @@
  ******************************************************************************/
 
 
-#include "include/traynotifier.h"
-#include "sarturis.h"
+#include "sarturis/base/logger.h"
+#include "notify_osx.h"
 using namespace sarturis;
 using namespace sarturis::gtk;
 
 
 /******************************************************************************/
-TrayNotifier::TrayNotifier(sarturis::ref<TextInput> Title,
-                           sarturis::ref<TextInput> Message):
-                title(Title),
-                msg(Message),
-                ntf(Notify::Create(Pixbuf(_sarturis_,sizeof(_sarturis_))))
+sarturis::ref<Notify> Notify::Create(GdkPixbuf* Icon)
+/******************************************************************************/
+{
+  return new NotifyOSX(Icon);
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+NotifyOSX::NotifyOSX(GdkPixbuf* Icon)
 /******************************************************************************/
 {
 }
@@ -39,7 +44,7 @@ TrayNotifier::TrayNotifier(sarturis::ref<TextInput> Title,
 
 
 /******************************************************************************/
-TrayNotifier::~TrayNotifier()
+NotifyOSX::~NotifyOSX()
 /******************************************************************************/
 {
 }
@@ -47,9 +52,10 @@ TrayNotifier::~TrayNotifier()
 
 
 /******************************************************************************/
-void TrayNotifier::Exec()
+void NotifyOSX::Balloon(const std::string& Title, const std::string& Info)
 /******************************************************************************/
 {
-  ntf->Balloon(title->Get(),msg->Get());
+  Logger::Warning("No implementation for notifications");
+  Logger::Info(Title+": "+Info);
 }
 /******************************************************************************/
