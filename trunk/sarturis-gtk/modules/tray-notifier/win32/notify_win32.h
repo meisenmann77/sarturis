@@ -20,13 +20,11 @@
  ******************************************************************************/
 
 
-#ifndef __TRAYNOTIFIER__
-#define __TRAYNOTIFIER__
+#ifndef __NOTIFYWIN32__
+#define __NOTIFYWIN32__
 
-#include "sarturis/interface/executable.h"
-#include "sarturis/interface/textinput.h"
-#include "sarturis/gtk/base.h"
-#include "notify.h"
+#include <windows.h>
+#include "include/notify.h"
 
 
 /******************************************************************************/
@@ -34,30 +32,26 @@ namespace sarturis
 {
   namespace gtk
   {
-    class TrayNotifier : public Executable, public Base
+    class NotifyWIN32 : public Notify
     {
       public:
-        // Konstruktor
-        TrayNotifier(sarturis::ref<TextInput> Title,
-                     sarturis::ref<TextInput> Message);
+        // Konstruktur
+        NotifyWIN32(GdkPixbuf* Icon);
 
-        // Impl. Executable
-        void Exec();
+        // Anzeige der Balloon-Nachricht
+        void Balloon(const std::string& Title, const std::string& Info);
 
       protected:
         // Destruktor
-        ~TrayNotifier();
+        ~NotifyWIN32();
 
       private:
-        // Referenzen
-        sarturis::ref<TextInput> title;
-        sarturis::ref<TextInput> msg;
-
-        // Balloon-Icon
-        sarturis::ref<Notify> ntf;
+        // id (generiert aus Anzahl) und Icon
+        int id;
+        HICON icon;
     };
   }
 }
 /******************************************************************************/
 
-#endif // __TRAYNOTIFIER__
+#endif // __NOTIFYWIN32__

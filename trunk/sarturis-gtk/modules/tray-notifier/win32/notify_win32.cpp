@@ -20,36 +20,69 @@
  ******************************************************************************/
 
 
-#include "include/traynotifier.h"
-#include "sarturis.h"
-using namespace sarturis;
+#include <gdk/gdkwin32.h>
+#include "notify_win23.h"
 using namespace sarturis::gtk;
 
 
 /******************************************************************************/
-TrayNotifier::TrayNotifier(sarturis::ref<TextInput> Title,
-                           sarturis::ref<TextInput> Message):
-                title(Title),
-                msg(Message),
-                ntf(Notify::Create(Pixbuf(_sarturis_,sizeof(_sarturis_))))
+sarturis::ref<Notify> Notify::Create(GdkPixbuf* Icon)
 /******************************************************************************/
 {
+  return new NotifyWIN32(Icon);
 }
 /******************************************************************************/
 
 
 /******************************************************************************/
-TrayNotifier::~TrayNotifier()
+NotifyWIN32::NotifyWIN32(GdkPixbuf* Icon):id(100+cnt++)
 /******************************************************************************/
 {
+  icon=gdk_win32_pixbuf_to_hicon_libgtk_only(Icon);
+
+  NOTIFYICONDATA d;
+  memset(&d,0,sizeof(NOTIFYICONDATA));
+  d.cbSize=sizeof(NOTIFYICONDATA);
+  d.hIcon=icon;
+  d.uFlags=NIF_ICON;
+  d.hWnd=GetDesktopWindow();
+  d.uID=id;
+
+  Shell_NotifyIcon(NIM_ADD,&d);
 }
 /******************************************************************************/
 
 
 /******************************************************************************/
-void TrayNotifier::Exec()
+NotifyWIN32::~NotifyWIN32()
 /******************************************************************************/
 {
-  ntf->Balloon(title->Get(),msg->Get());
+  NOTIFYICONDATA d;
+  memset(&d,0,sizeof(NOTIFYICONDATA));
+  d.cbSize=sizeof(NOTIFYICONDATA);
+  d.hWnd=GetDesktopWindow();
+  d.uID=id;
+  Shell_NotifyIcon(NIM_DELETE,&d);
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+void NotifyWIN32::Balloon(const std::string& Title, const std::string& Info)
+/******************************************************************************/
+{
+  NOTIFYICONDATA d;
+  memset(&d,0,sizeof(NOTIFYICONDATA));
+  d.cbSize=NOTIFYICONDATA_V3_SIZE;
+  d.hWnd=GetDesktopWindow();
+  d.uFlags=NIF_INFO;
+  d.dwInfoFlags=NIIF_USER;
+  d.uID=id;
+  d.hBalloonIcon=icon;
+
+  strcpy_s(d.szInfo,Info.c_str());
+  strcpy_s(d.szInfoTitle,Title.c_str());
+
+  Shell_NotifyIcon(NIM_MODIFY,&d);
 }
 /******************************************************************************/
