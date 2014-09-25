@@ -20,6 +20,7 @@
  ******************************************************************************/
 
 
+#include <libnotify/notify.h>
 #include "notify_linux.h"
 using namespace sarturis::gtk;
 
