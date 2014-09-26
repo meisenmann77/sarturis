@@ -51,6 +51,7 @@ namespace sarturis
           libvlc_media_player_t* player;
 
           GtkWidget* setup();
+          void set_widget(GtkWidget* w);
           static void realize(GtkWidget* w, Viewer* v);
       };
     }
