@@ -23,16 +23,16 @@ SET(misc-vlc_headers include/camera.h
 
 # Platform
 IF(SARTURIS_CYGWIN)
-  SET(platform_sources viewer_cygwin.cpp)  
+  SET(platform_sources cygwin/viewer_cygwin.cpp cygwin/camera_cygwin.cpp)
 ENDIF(SARTURIS_CYGWIN)
 IF(SARTURIS_LINUX)
-  SET(platform_sources viewer_linux.cpp)  
+  SET(platform_sources linux/viewer_linux.cpp linux/camera_linux.cpp)
 ENDIF(SARTURIS_LINUX)
 IF(SARTURIS_APPLE)
-  SET(platform_sources viewer_osx.mm)  
+  SET(platform_sources osx/viewer_osx.mm osx/camera_osx.mm)
 ENDIF(SARTURIS_APPLE)
 IF(SARTURIS_WIN32)
-  SET(platform_sources viewer_win32.cpp)  
+  SET(platform_sources win32/viewer_win32.cpp win32/camera_win32.cpp)
 ENDIF(SARTURIS_WIN32)
 
 # Modul

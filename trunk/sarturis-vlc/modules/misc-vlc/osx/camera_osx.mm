@@ -20,39 +20,17 @@
  ******************************************************************************/
 
 
-#ifndef __CAMERA__
-#define __CAMERA__
+#include "include/camera.h"
+using namespace sarturis::vlc;
 
-#include <string>
-#include "mediasource.h"
 
 /******************************************************************************/
-namespace sarturis
+std::string Camera::device_string()
+/******************************************************************************/
 {
-  namespace vlc
-  {
-    class Camera  : public MediaSource
-    {
-      public:
-        // Konstruktor
-        Camera(const std::string& Device);
+  std::string ret="qtcapture://";
+  if (device!="__EMPTY__") ret+=device;
 
-      protected:
-        // Destruktor
-        ~Camera();
-
-      private:
-        // Device
-        std::string device;
-
-        // Decice-String
-        std::string device_string();
-
-        // Impl. MediaSource
-        libvlc_media_t* create();
-    };
-  }
+  return ret;
 }
 /******************************************************************************/
-
-#endif
