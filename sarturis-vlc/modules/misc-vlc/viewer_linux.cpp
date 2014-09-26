@@ -20,52 +20,24 @@
  ******************************************************************************/
 
 
+#include <gdk/gdkx.h>
 #include "include/viewer.h"
 using namespace sarturis::vlc;
 using namespace sarturis::vlc::gtk;
 
 
 /******************************************************************************/
-Viewer::Viewer(sarturis::ref<MediaSource> Source):source(Source),player(0)
+void Viewer::set_widget(GtkWidget* w)
 /******************************************************************************/
 {
-}
-/******************************************************************************/
+  // X11-Id
+  #ifdef SARTURIS_GTK2
+    uint32_t xid=gdk_x11_drawable_get_xid(w->window);
+  #else
+    uint32_t xid=GDK_WINDOW_XID(gtk_widget_get_window(w));
+  #endif
 
-
-/******************************************************************************/
-Viewer::~Viewer()
-/******************************************************************************/
-{
-  if (player) libvlc_media_player_release(player);
-}
-/******************************************************************************/
-
-
-/******************************************************************************/
-GtkWidget* Viewer::setup()
-/******************************************************************************/
-{
-  // Drawing-Area
-  GtkWidget* area=gtk_drawing_area_new();
-  gtk_widget_show(area);
-  g_signal_connect(area,"realize",(GCallback)realize,this);
-  return area;
-}
-/******************************************************************************/
-
-
-/******************************************************************************/
-void Viewer::realize(GtkWidget* w, Viewer* v)
-/******************************************************************************/
-{
-  // Player erzeugen
-  v->player=libvlc_media_player_new_from_media(v->source->GetMedia());
-
-  // Drawable (des Widgets) setzen
-  v->set_widget(w);
-
-  // Abspielen
-  libvlc_media_player_play(v->player);
+  // Setzen
+  libvlc_media_player_set_xwindow(v->player,xid);
 }
 /******************************************************************************/
