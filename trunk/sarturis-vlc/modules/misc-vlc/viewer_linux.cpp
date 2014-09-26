@@ -38,6 +38,6 @@ void Viewer::set_widget(GtkWidget* w)
   #endif
 
   // Setzen
-  libvlc_media_player_set_xwindow(v->player,xid);
+  libvlc_media_player_set_xwindow(player,xid);
 }
 /******************************************************************************/
