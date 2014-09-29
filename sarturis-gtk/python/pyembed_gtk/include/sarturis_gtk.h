@@ -20,23 +20,12 @@
  ******************************************************************************/
 
 
-#ifdef SARTURIS_GTK2
-  #include <pygtk/pygtk.h>
-#else
-  #include <pygobject.h>
-#endif
+#include <pygobject.h>
 #include "sarturis/gtk/widget.h"
 #include "sarturis/python/generic.h"
 using namespace sarturis;
 using namespace sarturis::gtk;
 using namespace sarturis::python;
-
-
-/******************************************************************************/
-#ifdef SARTURIS_GTK2
-  struct _PyGObject_Functions* _PyGObject_API;
-#endif
-/******************************************************************************/
 
 
 /******************************************************************************/

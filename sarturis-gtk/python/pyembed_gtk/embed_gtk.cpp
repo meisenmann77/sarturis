@@ -41,15 +41,10 @@ extern "C" DLLIMPORT void initpyembed()
 {
   Py_InitModule("pyembed",EMBED_API);
 
-  #ifdef SARTURIS_GTK2
-    pygobject_init(-1,-1,-1);
-    init_pygtk();
-#else
-    PyImport_ImportModule("gi");
-    PyImport_ImportModule("gi.repository");
-    PyImport_ImportModule("gi.repository.GObject");
-    PyImport_ImportModule("gi.repository.Gtk");
-    pygobject_init(-1,-1,-1);
-  #endif
+  PyImport_ImportModule("gi");
+  PyImport_ImportModule("gi.repository");
+  PyImport_ImportModule("gi.repository.GObject");
+  PyImport_ImportModule("gi.repository.Gtk");
+  pygobject_init(-1,-1,-1);
 }
 /******************************************************************************/
