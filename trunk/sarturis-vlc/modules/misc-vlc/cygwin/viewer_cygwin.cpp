@@ -31,11 +31,7 @@ void Viewer::set_widget(GtkWidget* w)
 /******************************************************************************/
 {
   // X11-Id
-  #ifdef SARTURIS_GTK2
-    uint32_t xid=gdk_x11_drawable_get_xid(w->window);
-  #else
-    uint32_t xid=GDK_WINDOW_XID(gtk_widget_get_window(w));
-  #endif
+  uint32_t xid=GDK_WINDOW_XID(gtk_widget_get_window(w));
 
   // Setzen
   libvlc_media_player_set_xwindow(player,xid);
