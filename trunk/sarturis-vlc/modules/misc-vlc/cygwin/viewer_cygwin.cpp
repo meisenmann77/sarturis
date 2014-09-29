@@ -20,6 +20,7 @@
  ******************************************************************************/
 
 
+#include <gdk/gdkx.h>
 #include "include/viewer.h"
 using namespace sarturis::vlc;
 using namespace sarturis::vlc::gtk;
@@ -29,6 +30,14 @@ using namespace sarturis::vlc::gtk;
 void Viewer::set_widget(GtkWidget* w)
 /******************************************************************************/
 {
-  // TODO: Implement me
+  // X11-Id
+  #ifdef SARTURIS_GTK2
+    uint32_t xid=gdk_x11_drawable_get_xid(w->window);
+  #else
+    uint32_t xid=GDK_WINDOW_XID(gtk_widget_get_window(w));
+  #endif
+
+  // Setzen
+  libvlc_media_player_set_xwindow(player,xid);
 }
 /******************************************************************************/
