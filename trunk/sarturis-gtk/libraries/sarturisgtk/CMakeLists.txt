@@ -48,12 +48,7 @@ IF(SARTURIS_WIN32)
 ENDIF(SARTURIS_WIN32)
 
 # Kompatibilitaets-Wrapper
-IF(GTK_VERSION_GTK3)
-  SET(compat_sources compat_gtk3.c)
-ENDIF(GTK_VERSION_GTK3)
-IF(GTK_VERSION_GTK2)
-  SET(compat_sources compat_gtk2.c)
-ENDIF(GTK_VERSION_GTK2)
+SET(compat_sources compat_gtk3.c)
 
 # Bibliothek
 SHARED_LIBRARY(sarturisgtk ${sarturisgtk_sources} ${sarturisgtk_headers} ${compat_sources} ${platform_sources} ${platform_headers})

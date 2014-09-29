@@ -77,13 +77,7 @@ bool Base::Display(bool InitIfNot)
 int Base::GtkVersion()
 /******************************************************************************/
 {
-  #ifdef SARTURIS_GTK2
-    return 2;
-  #endif
-
-  #ifdef SARTURIS_GTK3
-    return 3;
-  #endif
+  return 3;
 }
 /******************************************************************************/
 
