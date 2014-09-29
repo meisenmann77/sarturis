@@ -24,10 +24,11 @@
 using namespace sarturis;
 using namespace sarturis::gtk;
 
-#include <iostream>
 
 /******************************************************************************/
-ComboBox::ComboBox(const combobox::_Item_Vec_& c_items):_comboBox(0),_items(c_items), _value("")
+ComboBox::ComboBox(const combobox::_Item_Vec_& c_items):_comboBox(0),
+                                                        _items(c_items),
+                                                        _value("")
 /******************************************************************************/
 {
 }
@@ -55,11 +56,10 @@ std::string ComboBox::Get()
 void ComboBox::Update()
 /******************************************************************************/
 {
-  #ifdef SARTURIS_GTK2
-    if (_comboBox) _value = gtk_combo_box_get_active_text(GTK_COMBO_BOX(_comboBox));
-  #else
-    if (_comboBox) _value = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(_comboBox));
-  #endif
+  if (_comboBox)
+  {
+    _value = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(_comboBox));
+  }
 }
 /******************************************************************************/
 
@@ -69,20 +69,13 @@ GtkWidget* ComboBox::setup()
 /******************************************************************************/
 {
   // ComboBox erzeugen
-  #if SARTURIS_GTK2
-    _comboBox = gtk_combo_box_entry_new_text ();
-  #else
-    _comboBox = gtk_combo_box_text_new_with_entry ();
-  #endif
+  _comboBox = gtk_combo_box_text_new_with_entry ();
 
 	// items setzen
 	for(unsigned int i=0; i < _items.size(); i++)
 	{
-    #if SARTURIS_GTK2
-	  	gtk_combo_box_append_text (GTK_COMBO_BOX (_comboBox), _items[i].Text.c_str());
-    #else
-	  	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (_comboBox), _items[i].Text.c_str());
-  	#endif
+	  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (_comboBox),
+	                                  _items[i].Text.c_str());
 	}
 
 	// ComboBox anzeigen

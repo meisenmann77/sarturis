@@ -6,12 +6,7 @@ ENDIF(NOT SPLASH_IMAGE)
 # Ausgabe, Code und Dateiname
 MESSAGE(STATUS "splash image is " ${SPLASH_IMAGE})
 ADD_DEFINITIONS(-DSHOW_SPLASH)
-IF(GTK_VERSION_GTK2)
-  SET(splash_files splashscreen2.cpp include/splashscreen.h include/splashscreen2.h)
-ENDIF(GTK_VERSION_GTK2)
-IF(GTK_VERSION_GTK3)
-  SET(splash_files splashscreen3.cpp include/splashscreen.h include/splashscreen3.h)
-ENDIF(GTK_VERSION_GTK3)
+SET(splash_files splashscreen3.cpp include/splashscreen.h include/splashscreen3.h)
 GET_FILENAME_COMPONENT(SPLASH_FILE_NAME_WE ${SPLASH_IMAGE} NAME_WE)
 STRING(REPLACE "-" "_" SPLASH_SYMBOL_NAME ${SPLASH_FILE_NAME_WE})
 

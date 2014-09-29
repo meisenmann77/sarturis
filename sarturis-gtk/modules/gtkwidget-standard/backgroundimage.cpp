@@ -52,18 +52,8 @@ GtkWidget* BackgroundImage::setup()
   bg_image_widget = gtk_event_box_new();
   gtk_widget_show(bg_image_widget);
 
-#ifdef SARTURIS_GTK2
-  GdkPixmap* img_pixmap;
-  GdkColormap* colormap = gdk_colormap_new(gdk_visual_get_system(),FALSE);
-  img_pixmap = gdk_pixmap_colormap_create_from_xpm(NULL,colormap,NULL,NULL,filename.c_str());
-
-  GtkStyle* style = gtk_style_new();
-  style->bg_pixmap[0] = img_pixmap;
-  gtk_widget_set_style((GtkWidget*)bg_image_widget,style);
-#else
-
+  // TODO: What to do!
   Logger::Warning("Background images are not supported by sarturis and gtk3");
-#endif
 
   gtk_container_add (GTK_CONTAINER (bg_image_widget), child->GetWidget() );
 

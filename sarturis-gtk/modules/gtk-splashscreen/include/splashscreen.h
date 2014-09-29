@@ -20,10 +20,4 @@
  ******************************************************************************/
 
 
-#ifdef SARTURIS_GTK2
-#include "splashscreen2.h"
-#endif
-
-#ifdef SARTURIS_GTK3
 #include "splashscreen3.h"
-#endif
