@@ -47,11 +47,6 @@ Window::Window(sarturis::ref<Widget> Child, const std::string& Title,
   window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title(GTK_WINDOW(window),Title.c_str());
 
-  // Position
-  #ifdef SARTURIS_GTK2
-    gtk_widget_set_uposition(window,X,Y);
-  #endif
-
   // Groesse
   if (Width && Height) gtk_widget_set_size_request(window,Width,Height);
   if (FullScreen) gtk_window_fullscreen(GTK_WINDOW(window));
