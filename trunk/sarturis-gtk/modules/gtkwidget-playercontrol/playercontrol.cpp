@@ -170,12 +170,8 @@ GtkWidget* PlayerControl::setup()
 
 	// Scale anlegen
 	// Adjustment mit aktuellem Wert
-	#ifdef SARTURIS_GTK2
-  	GtkObject* adj=0;
-  #else
-  	GtkAdjustment* adj=0;
-  #endif	
-	adj=gtk_adjustment_new(startZeit,startZeit,endZeit,0.001,0.01,0.0);
+  GtkAdjustment* adj=gtk_adjustment_new(startZeit,startZeit,endZeit,0.001,0.01,0.0);
+
 	// Schieber horizontal oder vertical
 	scale=_gtk_hscale_new(GTK_ADJUSTMENT(adj));
 	// Stellen, Wert anzeigen

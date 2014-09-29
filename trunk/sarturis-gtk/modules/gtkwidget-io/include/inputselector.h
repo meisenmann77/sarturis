@@ -72,12 +72,8 @@ namespace sarturis
           if (!cb) return;
 
           // atkives Element bestimmen
-          std::string t;
-          #ifdef SARTURIS_GTK2
-            t=gtk_combo_box_get_active_text(GTK_COMBO_BOX(cb));
-          #else
-            t=gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb));
-          #endif
+          std::string t=gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb));
+
           active=items[t];
         }
 
@@ -97,20 +93,12 @@ namespace sarturis
         GtkWidget* setup()
         {
           // ComboBox erzeugen
-          #if SARTURIS_GTK2
-            cb=gtk_combo_box_entry_new_text();
-          #else
-            cb=gtk_combo_box_text_new_with_entry();
-          #endif
+          cb=gtk_combo_box_text_new_with_entry();
 
           // items setzen
           for(unsigned int i=0;i<vitems.size();++i)
           {
-            #if SARTURIS_GTK2
-              gtk_combo_box_append_text(GTK_COMBO_BOX(cb),vitems[i].Caption.c_str());
-            #else
-              gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb),vitems[i].Caption.c_str());
-            #endif
+            gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb),vitems[i].Caption.c_str());
           }
 
 	        // ComboBox anzeigen und return

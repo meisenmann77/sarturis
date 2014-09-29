@@ -59,13 +59,7 @@ GtkWidget* ScrolledWindow::setup()
                                  (GtkPolicyType)px,(GtkPolicyType)py);
 
   // Fuege Child hinzu
-  #ifdef SARTURIS_GTK2
-    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(wnd),
-                                          child->GetWidget());
-  #endif
-  #ifdef SARTURIS_GTK3
-    gtk_container_add(GTK_CONTAINER(wnd),child->GetWidget());
-  #endif
+  gtk_container_add(GTK_CONTAINER(wnd),child->GetWidget());
 
   // Verbinde mit Style-Set-Callback
   g_signal_connect(G_OBJECT(child->GetWidget()),"style-set",

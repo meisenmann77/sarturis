@@ -80,26 +80,8 @@ GtkWidget* DigitalLED::setup()
   // 12x12 Pixel
   gtk_widget_set_size_request(area,12,12);
 
-#ifdef SARTURIS_GTK2
-  // Farbe fuer "an"
-  color_on.red=(guint16)(red*65535.0);
-  color_on.green=(guint16)(green*65535.0);
-  color_on.blue=(guint16)(blue*65535.0);
-  gdk_colormap_alloc_color(gdk_colormap_get_system(),&color_on,FALSE,TRUE);
-
-  // Farbe fuer "aus"
-  color_off.red=0;
-  color_off.green=0;
-  color_off.blue=0;
-  gdk_colormap_alloc_color(gdk_colormap_get_system(),&color_off,FALSE,TRUE);
-#endif
-
-  // Callbacks
-#ifdef SARTURIS_GTK2
-  g_signal_connect(G_OBJECT(area),"expose_event",G_CALLBACK(expose),this);
-#else
+  // Callback
   g_signal_connect(G_OBJECT(area),"draw",G_CALLBACK(draw),this);
-#endif
 
   // return
   return area;
@@ -108,44 +90,6 @@ GtkWidget* DigitalLED::setup()
 
 
 /******************************************************************************/
-#ifdef SARTURIS_GTK2
-gboolean DigitalLED::expose(GtkWidget* widget, GdkEventExpose* event,
-                            DigitalLED* d)
-/******************************************************************************/
-{
-  // Breite und Hoehe
-  GtkAllocation alloc;
-  gtk_widget_get_allocation(widget,&alloc);
-  const unsigned int width=alloc.width;
-  const unsigned int height=alloc.height;
-
-  // Kleinste Abmessung ist Durchmesser
-  const unsigned int dia=width < height ? width : height;
-
-  // Hintergrund-Rechteck
-  gdk_draw_rectangle(widget->window,
-                     widget->style->bg_gc[GTK_WIDGET_STATE(widget)],TRUE,
-                     0,0,width,height);
-
-  // GC
-  GdkGC* gc=gdk_gc_new(widget->window);
-  gdk_gc_set_foreground(gc,d->value ? &(d->color_on) : &(d->color_off));
-
-  // Kreis
-  gdk_draw_arc(widget->window,gc,TRUE,
-               (width-dia)/2,(height-dia)/2,dia,dia,
-               0,64*360);
-
-  // GC freigeben und return
-  g_object_unref(gc);
-  return TRUE;
-}
-#endif
-/******************************************************************************/
-
-
-/******************************************************************************/
-#ifdef SARTURIS_GTK3
 gboolean DigitalLED::draw(GtkWidget* widget, cairo_t* cr, DigitalLED* d)
 /******************************************************************************/
 {
@@ -167,5 +111,4 @@ gboolean DigitalLED::draw(GtkWidget* widget, cairo_t* cr, DigitalLED* d)
   // return
   return TRUE;
 }
-#endif
 /******************************************************************************/

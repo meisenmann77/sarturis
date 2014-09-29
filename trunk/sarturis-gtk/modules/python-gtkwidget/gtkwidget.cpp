@@ -20,13 +20,8 @@
  ******************************************************************************/
 
 
-#ifdef SARTURIS_GTK2
-  #include <pygtk/pygtk.h>
-  #define PYMODULE "gtk"
-#else
-  #include <pygobject.h>
-  #define PYMODULE "gi.overrides.Gtk"
-#endif
+#include <pygobject.h>
+#define PYMODULE "gi.overrides.Gtk"
 #include "sarturis/apps/datamanager.h"
 #include "include/gtkwidget.h"
 using namespace sarturis;

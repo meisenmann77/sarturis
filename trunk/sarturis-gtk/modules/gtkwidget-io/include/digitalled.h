@@ -57,14 +57,8 @@ namespace sarturis
         // Impl. Widget::setup
         GtkWidget* setup();
 
-        // Callbacks
-        #ifdef SARTURIS_GTK2
-          static gboolean expose(GtkWidget* widget, GdkEventExpose* event,
-                                 DigitalLED* d);
-        #endif
-        #ifdef SARTURIS_GTK3
-          static gboolean draw(GtkWidget* widget, cairo_t* cr, DigitalLED* d);
-        #endif
+        // Callback
+        static gboolean draw(GtkWidget* widget, cairo_t* cr, DigitalLED* d);
 
         // Zwischengespeicherte Werte
         int value;
@@ -74,10 +68,8 @@ namespace sarturis
         GtkWidget* area;
 
         // Farbe
-        #ifdef SARTURIS_GTK2
-          GdkColor color_on;
-          GdkColor color_off;
-        #endif
+        GdkColor color_on;
+        GdkColor color_off;
     };
   }
 }

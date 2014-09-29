@@ -86,12 +86,7 @@ GtkWidget* AnalogSlider::setup()
 /******************************************************************************/
 {
   // Adjustment mit aktuellem Wert
-  #ifdef SARTURIS_GTK2
-    GtkObject* adj=0;
-  #else
-    GtkAdjustment* adj=0;
-  #endif
-  adj=gtk_adjustment_new(value,min,max,0.001,0.01,0.0);
+  GtkAdjustment* adj=gtk_adjustment_new(value,min,max,0.001,0.01,0.0);
 
   // Schieber horizontal oder vertical
   if (orientation=="horizontal") scale=_gtk_hscale_new(GTK_ADJUSTMENT(adj));
