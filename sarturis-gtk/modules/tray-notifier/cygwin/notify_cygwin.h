@@ -23,6 +23,7 @@
 #ifndef __NOTIFYCYGWIN__
 #define __NOTIFYCYGWIN__
 
+#include <windows.h>
 #include "include/notify.h"
 
 
@@ -43,7 +44,12 @@ namespace sarturis
       protected:
         // Destruktor
         ~NotifyCygwin();        
-    };
+
+      private:
+        // id (generiert aus Anzahl) und Icon
+        int id;
+        HICON icon;
+	};
   }
 }
 /******************************************************************************/

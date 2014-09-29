@@ -36,9 +36,21 @@ sarturis::ref<Notify> Notify::Create(GdkPixbuf* Icon)
 
 
 /******************************************************************************/
-NotifyCygwin::NotifyCygwin(GdkPixbuf* Icon)
+NotifyCygwin::NotifyCygwin(GdkPixbuf* Icon):id(100+cnt++)
 /******************************************************************************/
 {
+  Logger::Warning("Ignoring custom icon, using a default one!");
+  icon=LoadIcon(NULL,IDI_APPLICATION);
+
+  NOTIFYICONDATA d;
+  memset(&d,0,sizeof(NOTIFYICONDATA));
+  d.cbSize=sizeof(NOTIFYICONDATA);
+  d.hIcon=icon;
+  d.uFlags=NIF_ICON;
+  d.hWnd=GetDesktopWindow();
+  d.uID=id;
+
+  Shell_NotifyIcon(NIM_ADD,&d);
 }
 /******************************************************************************/
 
@@ -47,6 +59,12 @@ NotifyCygwin::NotifyCygwin(GdkPixbuf* Icon)
 NotifyCygwin::~NotifyCygwin()
 /******************************************************************************/
 {
+  NOTIFYICONDATA d;
+  memset(&d,0,sizeof(NOTIFYICONDATA));
+  d.cbSize=sizeof(NOTIFYICONDATA);
+  d.hWnd=GetDesktopWindow();
+  d.uID=id;
+  Shell_NotifyIcon(NIM_DELETE,&d);
 }
 /******************************************************************************/
 
@@ -55,7 +73,17 @@ NotifyCygwin::~NotifyCygwin()
 void NotifyCygwin::Balloon(const std::string& Title, const std::string& Info)
 /******************************************************************************/
 {
-  Logger::Warning("No implementation for notifications");
-  Logger::Info(Title+": "+Info);
+  NOTIFYICONDATA d;
+  memset(&d,0,sizeof(NOTIFYICONDATA));
+  d.cbSize=sizeof(NOTIFYICONDATA);
+  d.hWnd=GetDesktopWindow();
+  d.uFlags=NIF_INFO;
+  d.dwInfoFlags=NIIF_USER;
+  d.uID=id;
+
+  strcpy(d.szInfo,Info.c_str());
+  strcpy(d.szInfoTitle,Title.c_str());
+
+  Shell_NotifyIcon(NIM_MODIFY,&d);
 }
 /******************************************************************************/
