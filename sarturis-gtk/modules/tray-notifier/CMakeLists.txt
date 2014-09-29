@@ -14,7 +14,7 @@ SET(embedded_headers ${CMAKE_CURRENT_BINARY_DIR}/sarturis.h)
 
 # Plattform-Sourcen
 IF(SARTURIS_CYGWIN)
-  SET(platform_sources cygwin/notify_cygwin.cpp)  
+  SET(platform_sources cygwin/notify_cygwin.cpp cygwin/logo_cygwin.rc)  
   SET(platform_headers cygwin/notify_cygwin.h)
   SET(platform_libs )
 ENDIF(SARTURIS_CYGWIN)

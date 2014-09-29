@@ -20,10 +20,13 @@
  ******************************************************************************/
 
 
-#include "sarturis/base/logger.h"
 #include "notify_cygwin.h"
 using namespace sarturis;
 using namespace sarturis::gtk;
+
+/******************************************************************************/
+static char dummy=0;
+/******************************************************************************/
 
 
 /******************************************************************************/
@@ -39,8 +42,9 @@ sarturis::ref<Notify> Notify::Create(GdkPixbuf* Icon)
 NotifyCygwin::NotifyCygwin(GdkPixbuf* Icon):id(100+cnt++)
 /******************************************************************************/
 {
-  Logger::Warning("Ignoring custom icon, using a default one!");
-  icon=LoadIcon(NULL,IDI_APPLICATION);
+  HMODULE h;
+  GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS,&dummy,&h);
+  icon=LoadIcon(h,MAKEINTRESOURCE(500));
 
   NOTIFYICONDATA d;
   memset(&d,0,sizeof(NOTIFYICONDATA));
