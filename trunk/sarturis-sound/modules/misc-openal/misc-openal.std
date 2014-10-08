@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../../sarturis/common/typedefinition.xsd">
+
+  <Module Name="misc-openal" Vendor="TU Dresden" Comment="Sound support with OpenAL">
+
+    <!-- Sample -->
+    <Type Name="sarturis::sound::Sample" Comment="Sound sample from a file">
+      <Attribute Name="Filename" Type="string"/>
+      <Reference Name="Volume" Min="0" Max="1" Comment="Volume from 0-1">
+        <Instance Type="sarturis::AnalogInput"/>
+      </Reference>
+      <Reference Name="Frequency" Min="0" Max="1" Comment="Pitching (1 - normal, &gt;1 - high, &lt;1 - low )" >
+        <Instance Type="sarturis::AnalogInput"/>
+      </Reference>
+    </Type>
+
+    <!-- Sound -->
+    <Type Name="sarturis::sound::Sound" Comment="Sound object">
+      <Reference Name="Condition" Comment="Decides whether a sound is played or not">
+        <Instance Type="sarturis::DigitalInput"/>
+      </Reference>
+      <Reference Name="Position" Comment="The position of the sound source">
+        <Instance Type="sarturis::PositionInput"/>
+      </Reference>
+      <Reference Name="Start" Min="0" Max="1" Comment="Sample at the beginning - condition switches from 0 to 1">
+        <Instance Type="sarturis::sound::Sample"/>
+      </Reference>
+      <Reference Name="Middle" Min="0" Max="-1" Comment="Samples at the middle part - condition is 1 - in the order of playing">
+        <Instance Type="sarturis::sound::Sample"/>
+      </Reference>
+      <Reference Name="End" Min="0" Max="1" Comment="Sample at the end - condition switches from 1 to 0">
+        <Instance Type="sarturis::sound::Sample"/>
+      </Reference>
+    </Type>
+
+    <!-- Listener -->
+    <Type Name="sarturis::sound::Listener" Comment="Listener object - don't forget the update">
+      <Base Type="sarturis::Updateable"/>
+      <Reference Name="Position" Comment="Listener position">
+        <Instance Type="sarturis::PositionInput"/>
+      </Reference>
+      <Reference Name="Sound" Min="1" Max="-1" Comment="Sounds which the listener can hear">
+        <Instance Type="sarturis::sound::Sound"/>
+      </Reference>
+    </Type>
+
+    <CodeGeneration>
+      <ModuleInclude Filename="include/sample.h"/>
+      <ModuleInclude Filename="include/sound.h"/>
+      <ModuleInclude Filename="include/listener.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
