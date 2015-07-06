@@ -15,7 +15,7 @@ SET(sarturiscurses_headers ${SARTURIS_CURSES_INCLUDE_DIR}/sarturis/curses/export
 
 # Bibliothek
 SHARED_LIBRARY(sarturiscurses ${sarturiscurses_sources} ${sarturiscurses_headers})
-TARGET_LINK_LIBRARIES(sarturiscurses sarturisbase ${CURSESLIB})
+TARGET_LINK_LIBRARIES(sarturiscurses sarturisbase ${NCURSES_LIBRARIES})
 
 # Install
 INSTALL(FILES ${sarturiscurses_headers}

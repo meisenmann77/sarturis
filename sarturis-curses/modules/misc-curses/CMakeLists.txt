@@ -17,4 +17,4 @@ SET(misc-curses_headers include/bardrawer.h
 
 # Modul
 MODULE(misc-curses ${misc-curses_sources} ${misc-curses_headers})
-TARGET_LINK_LIBRARIES(misc-curses sarturiscurses ${CURSESLIB})
+TARGET_LINK_LIBRARIES(misc-curses sarturiscurses ${NCURSES_LIBRARIES})
