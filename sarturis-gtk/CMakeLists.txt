@@ -1,0 +1,32 @@
+# Projekt, cmake und pkg-config
+PROJECT(sarturis-gtk)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+FIND_PACKAGE(PkgConfig)
+
+# externe Dateien
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${SARTURIS_PREFIX}/share/cmake/Modules)
+INCLUDE(sarturis-common)
+INCLUDE(sarturis-library-postfix)
+INCLUDE(sarturis-prefix)
+INCLUDE(sarturis-platform)
+
+# Eigene CMake-Module
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+INCLUDE(sarturis-gtk)
+
+# Include
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
+SET(SARTURIS_GTK_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# Setze Sarturis-Pfade
+INCLUDE_DIRECTORIES(${SARTURIS_PREFIX}/include)
+LINK_DIRECTORIES(${SARTURIS_PREFIX}/lib${LIB_POSTFIX})
+
+# Verzeichnisse
+ADD_SUBDIRECTORY(cmake)
+ADD_SUBDIRECTORY(libraries)
+ADD_SUBDIRECTORY(modules)
+IF(SARTURIS_PYTHON)
+  ADD_SUBDIRECTORY(python)
+ENDIF(SARTURIS_PYTHON)
+
