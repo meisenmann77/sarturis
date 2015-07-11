@@ -72,7 +72,7 @@ SARTURIS_ENTRY const char* __sarturis_module_getvendor__()
 
 
 /******************************************************************************/
-SARTURIS_ENTRY unsigned int __sarturis_module_getversionmajor__()
+SARTURIS_ENTRY const char* __sarturis_module_getversionmajor__()
 /******************************************************************************/
 {
   return SARTURIS_VERSION_MAJOR;
@@ -99,7 +99,7 @@ SARTURIS_ENTRY const char* __sarturis_module_getversionpatch__()
 
 
 /******************************************************************************/
-SARTURIS_ENTRY unsigned int __sarturis_module_getversionrevision__()
+SARTURIS_ENTRY const char* __sarturis_module_getversionrevision__()
 /******************************************************************************/
 {
   return SARTURIS_VERSION_REVISION;
