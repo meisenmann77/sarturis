@@ -25,6 +25,7 @@
 
 #include <vlc/libvlc.h>
 #include <vlc/libvlc_media.h>
+#include <vlc/libvlc_events.h>
 #include <vlc/libvlc_media_player.h>
 #include "sarturis/gtk/widget.h"
 #include "mediasource.h"
