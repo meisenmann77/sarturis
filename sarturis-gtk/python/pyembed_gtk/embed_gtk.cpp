@@ -36,15 +36,30 @@ static PyMethodDef EMBED_API[]={
 
 
 /******************************************************************************/
-extern "C" DLLIMPORT void initpyembed()
+static struct PyModuleDef pyembed
+{
+  PyModuleDef_HEAD_INIT,
+  "pyembed",
+  "",
+  -1,
+  0
+};
+/******************************************************************************/
+
+
+
+/******************************************************************************/
+PyMODINIT_FUNC PyInit_pyembed()
 /******************************************************************************/
 {
-  Py_InitModule("pyembed",EMBED_API);
-
+  // TODO: Check
   PyImport_ImportModule("gi");
   PyImport_ImportModule("gi.repository");
   PyImport_ImportModule("gi.repository.GObject");
   PyImport_ImportModule("gi.repository.Gtk");
   pygobject_init(-1,-1,-1);
+
+  // TODO: Fill pyembed
+  return PyModule_Create(&pyembed);
 }
 /******************************************************************************/
