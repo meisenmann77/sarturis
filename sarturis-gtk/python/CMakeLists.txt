@@ -20,7 +20,7 @@ ADD_CUSTOM_TARGET(SARTURIS_GTK_PYTHON ALL DEPENDS ${CMAKE_BINARY_DIR}/python/sar
                                                   ${CMAKE_BINARY_DIR}/python/sarturis/gtk/gladegui.py)
 
 # Install
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/__init__.py   DESTINATION ${PYTHON_SITEDIR3}/sarturis/gtk)
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/gtkwrapper.py DESTINATION ${PYTHON_SITEDIR3}/sarturis/gtk)
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/guibase.py    DESTINATION ${PYTHON_SITEDIR3}/sarturis/gtk)
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/gladegui.py   DESTINATION ${PYTHON_SITEDIR3}/sarturis/gtk)
+INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/__init__.py   DESTINATION share/sarturis/python/sarturis/gtk)
+INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/gtkwrapper.py DESTINATION share/sarturis/python/sarturis/gtk)
+INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/guibase.py    DESTINATION share/sarturis/python/sarturis/gtk)
+INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/gladegui.py   DESTINATION share/sarturis/python/sarturis/gtk)
