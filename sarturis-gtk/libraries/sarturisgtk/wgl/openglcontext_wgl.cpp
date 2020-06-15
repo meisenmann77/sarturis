@@ -22,7 +22,7 @@
 
 #include <gdk/gdk.h>
 #include "sarturis/base/generalexception.h"
-#include "sarturis/gtk/wgl/openglcontext_wgl.h"
+#include "openglcontext_wgl.h"
 using namespace sarturis;
 using namespace sarturis::gtk;
 
@@ -35,7 +35,7 @@ OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
   gtk_widget_set_double_buffered(widget,FALSE);
 
   // get the device context (DC)
-  dc=GetDC((HWND)GDK_WINDOW_HWND(widget->window));
+  dc=GetDC((HWND)GDK_WINDOW_HWND(gtk_widget_get_window(widget)));
 
   // Pixel-Format
   PIXELFORMATDESCRIPTOR pfd;
