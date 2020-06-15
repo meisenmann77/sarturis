@@ -21,8 +21,18 @@
 
 
 #include <gdk/gdkwin32.h>
-#include "notify_win23.h"
+#include "notify_win32.h"
 using namespace sarturis::gtk;
+
+
+/******************************************************************************/
+static HICON gdk_win32_pixbuf_to_hicon_libgtk_only (GdkPixbuf *pixbuf)
+/******************************************************************************/
+{
+  // FIXME: compiles but crashes - use gtk status icon instead!!
+  return NULL;
+}
+/******************************************************************************/
 
 
 /******************************************************************************/
@@ -73,12 +83,12 @@ void NotifyWIN32::Balloon(const std::string& Title, const std::string& Info)
 {
   NOTIFYICONDATA d;
   memset(&d,0,sizeof(NOTIFYICONDATA));
-  d.cbSize=NOTIFYICONDATA_V3_SIZE;
+  d.cbSize=sizeof(NOTIFYICONDATA);
   d.hWnd=GetDesktopWindow();
   d.uFlags=NIF_INFO;
   d.dwInfoFlags=NIIF_USER;
   d.uID=id;
-  d.hBalloonIcon=icon;
+  d.hIcon=icon;
 
   strcpy_s(d.szInfo,Info.c_str());
   strcpy_s(d.szInfoTitle,Title.c_str());

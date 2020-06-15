@@ -44,7 +44,7 @@ ENDIF(SARTURIS_APPLE)
 IF(SARTURIS_WIN32)
   SET(platform_sources wgl/openglcontext_wgl.cpp)  
   SET(platform_headers wgl/openglcontext_wgl.h)
-  SET(platform_libs OpenGL32)
+  SET(platform_libs opengl32)
 ENDIF(SARTURIS_WIN32)
 
 # Kompatibilitaets-Wrapper

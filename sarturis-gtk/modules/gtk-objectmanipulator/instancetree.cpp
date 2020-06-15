@@ -21,7 +21,7 @@
 
 
 #ifdef WIN32
-  #include <Shlwapi.h>
+  #include <shlwapi.h>
   #define MATCH(P,N) (PathMatchSpec(N,P)==TRUE)
 #else
   #include <fnmatch.h>
