@@ -20,27 +20,26 @@
  ******************************************************************************/
 
 
-#ifndef __SARTURIS_GTK_OPENGLCONTEXT__
-#define __SARTURIS_GTK_OPENGLCONTEXT__
+#ifndef __SARTURIS_GTK_OPENGLCONTEXTWGL__
+#define __SARTURIS_GTK_OPENGLCONTEXTWGL__
 
 #include <gdk/gdkwin32.h>
 #include <windows.h>
 #include <gtk/gtk.h>
 
-#include "sarturis/base/referenced.h"
 #include "sarturis/gtk/export.h"
-#include "sarturis/gtk/base.h"
+#include "sarturis/gtk/openglcontext.h"
 
 /******************************************************************************/
 namespace sarturis
 {
   namespace gtk
   {
-    class DLLIMPORT OpenGLContext : virtual public Referenced, public Base
+    class DLLIMPORT OpenGLContextWGL : public OpenGLContext
     {
       public:
         // Konstruktor
-        OpenGLContext(GtkWidget* Widget);
+        OpenGLContextWGL(GtkWidget* Widget);
 
         // Fensterkoordinaten aktualisierten
         void Update(GtkAllocation A);
@@ -51,7 +50,7 @@ namespace sarturis
 
       protected:
         // Destruktor
-        ~OpenGLContext();
+        ~OpenGLContextWGL();
 
       private:
         // Widget

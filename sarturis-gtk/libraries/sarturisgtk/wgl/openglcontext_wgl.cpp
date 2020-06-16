@@ -28,7 +28,16 @@ using namespace sarturis::gtk;
 
 
 /******************************************************************************/
-OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
+sarturis::ref<OpenGLContext> OpenGLContext::Create(GtkWidget* Widget)
+/******************************************************************************/
+{
+  return new OpenGLContextWGL(Widget);
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+OpenGLContextWGL::OpenGLContextWGL(GtkWidget* Widget):widget(Widget),context(0)
 /******************************************************************************/
 {
   // Double-Buffered einstellen
@@ -59,7 +68,7 @@ OpenGLContext::OpenGLContext(GtkWidget* Widget):widget(Widget),context(0)
 
 
 /******************************************************************************/
-OpenGLContext::~OpenGLContext()
+OpenGLContextWGL::~OpenGLContextWGL()
 /******************************************************************************/
 {
   wglDeleteContext(context);
@@ -68,7 +77,16 @@ OpenGLContext::~OpenGLContext()
 
 
 /******************************************************************************/
-bool OpenGLContext::MakeCurrent()
+void OpenGLContextWGL::Update(GtkAllocation A)
+/******************************************************************************/
+{
+  /* Nichts zu tun bei WGL - geht von selber */
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+bool OpenGLContextWGL::MakeCurrent()
 /******************************************************************************/
 {
   // Context muss da sein
@@ -81,7 +99,7 @@ bool OpenGLContext::MakeCurrent()
 
 
 /******************************************************************************/
-void OpenGLContext::SwapBuffers()
+void OpenGLContextWGL::SwapBuffers()
 /******************************************************************************/
 {
   ::SwapBuffers(dc);
