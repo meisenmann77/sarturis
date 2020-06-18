@@ -10,10 +10,14 @@ INCLUDE(sarturis-library-postfix)
 INCLUDE(sarturis-prefix)
 INCLUDE(sarturis-platform)
 
-# vlc
-PKG_CHECK_MODULES(VLC REQUIRED libvlc)
-INCLUDE_DIRECTORIES(${VLC_INCLUDE_DIRS})
-LINK_DIRECTORIES(${VLC_LIBRARY_DIRS})
+IF(CMAKE_CROSSCOMPILING)
+  MESSAGE(STATUS "sarturis-vlc is not build with cross compiling (vlc is not building with mingw on fc32)")
+ELSE()
+  # vlc
+  PKG_CHECK_MODULES(VLC REQUIRED libvlc)
+  INCLUDE_DIRECTORIES(${VLC_INCLUDE_DIRS})
+  LINK_DIRECTORIES(${VLC_LIBRARY_DIRS})
 
-# Verzeichnisse
-ADD_SUBDIRECTORY(modules)
+  # Verzeichnisse
+  ADD_SUBDIRECTORY(modules)
+ENDIF()
