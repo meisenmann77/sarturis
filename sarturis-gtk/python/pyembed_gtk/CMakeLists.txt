@@ -12,6 +12,6 @@ SET_TARGET_PROPERTIES(pyembed_gtk PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BI
 
 # Install
 INSTALL(TARGETS pyembed_gtk
-        RUNTIME DESTINATION share/sarturis/python/sarturis/gtk COMPONENT sarturis_gtk
-        LIBRARY DESTINATION share/sarturis/python/sarturis/gtk COMPONENT sarturis_gtk
-        ARCHIVE DESTINATION share/sarturis/python/sarturis/gtk COMPONENT sarturis_gtk)
+        RUNTIME DESTINATION ${SARTURIS_PYTHON_INSTALL_PATH}/sarturis/gtk COMPONENT sarturis_gtk
+        LIBRARY DESTINATION ${SARTURIS_PYTHON_INSTALL_PATH}/sarturis/gtk COMPONENT sarturis_gtk
+        ARCHIVE DESTINATION ${SARTURIS_PYTHON_INSTALL_PATH}/sarturis/gtk COMPONENT sarturis_gtk)

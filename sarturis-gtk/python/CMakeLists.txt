@@ -23,9 +23,9 @@ ELSE()
                                                     ${CMAKE_BINARY_DIR}/python/sarturis/gtk/gladegui.py)
 
   # Install
-  INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/__init__.py   DESTINATION share/sarturis/python/sarturis/gtk)
-  INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/gtkwrapper.py DESTINATION share/sarturis/python/sarturis/gtk)
-  INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/guibase.py    DESTINATION share/sarturis/python/sarturis/gtk)
-  INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/gladegui.py   DESTINATION share/sarturis/python/sarturis/gtk)
+  INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/__init__.py   DESTINATION ${SARTURIS_PYTHON_INSTALL_PATH}/sarturis/gtk)
+  INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/gtkwrapper.py DESTINATION ${SARTURIS_PYTHON_INSTALL_PATH}/sarturis/gtk)
+  INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/guibase.py    DESTINATION ${SARTURIS_PYTHON_INSTALL_PATH}/sarturis/gtk)
+  INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/gladegui.py   DESTINATION ${SARTURIS_PYTHON_INSTALL_PATH}/sarturis/gtk)
 ENDIF()
 
