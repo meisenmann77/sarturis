@@ -84,7 +84,7 @@ namespace sarturis {
 				// GTK-Callbacks und Methoden die von dieser Klasse behandelt
 				// werden
 				GtkWidget* setup();
-				static gboolean OnExpose(GtkWidget* widget, GdkEventExpose* e,
+				static gboolean OnDraw(GtkWidget* widget, cairo_t* c,
 						gpointer user_data);
 				static gboolean OnConfigure(GtkWidget* w, GdkEventConfigure* e,
 						gpointer user_data);

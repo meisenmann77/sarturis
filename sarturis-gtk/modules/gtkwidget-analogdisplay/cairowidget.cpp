@@ -60,7 +60,7 @@ GtkWidget* CairoWidget::setup()
 {
 	GtkWidget* w = gtk_drawing_area_new();
 	g_signal_connect(
-			G_OBJECT(w), "expose-event", G_CALLBACK (OnExpose), this);
+			G_OBJECT(w), "draw", G_CALLBACK (OnDraw), this);
 	g_signal_connect(
 			G_OBJECT(w),"configure-event",G_CALLBACK(OnConfigure),this);
 	gtk_widget_show(w);
@@ -70,7 +70,7 @@ GtkWidget* CairoWidget::setup()
 /******************************************************************************/
 
 /******************************************************************************/
-gboolean CairoWidget::OnExpose(GtkWidget* widget, GdkEventExpose* e,
+gboolean CairoWidget::OnDraw(GtkWidget* widget, cairo_t* c,
 		gpointer user_data)
 /******************************************************************************/
 {
