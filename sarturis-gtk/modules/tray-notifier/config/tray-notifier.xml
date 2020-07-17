@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../schema/config-all.xsd">
+
+  <!-- Logger -->
+  <Instance xsi:type="sarturis__application__STDOUTLogger" Name="Logger"/>
+
+  <!-- Eingabefelder und Updates -->
+  <Instance xsi:type="sarturis__gtk__TextEdit" Name="Title" Text="Issue"/>
+  <Instance xsi:type="sarturis__Update" Name="Title_Update">
+    <Updateable Instance="Title"/>
+  </Instance>
+  <Instance xsi:type="sarturis__gtk__TextEdit" Name="Message" Text="Good or bad news"/>
+  <Instance xsi:type="sarturis__Update" Name="Message_Update">
+    <Updateable Instance="Message"/>
+  </Instance>
+
+  <!-- TrayNotifier -->
+  <Instance xsi:type="sarturis__gtk__TrayNotifier" Name="TrayNotifier">
+    <Title Instance="Title"/>
+    <Message Instance="Message"/>
+  </Instance>
+
+  <!-- Aktualisieren und Tray-Nachricht -->
+  <Instance xsi:type="sarturis__ExecutionGroup" Name="All_Tray">
+    <Executable Instance="Title_Update"/>
+    <Executable Instance="Message_Update"/>
+    <Executable Instance="TrayNotifier"/>
+  </Instance>
+
+  <!-- Button -->
+  <Instance xsi:type="sarturis__gtk__Label" Name="ButtonLabel" Text="Nachricht"/>
+  <Instance xsi:type="sarturis__gtk__Button" Name="Button">
+    <Label Instance="ButtonLabel"/>
+    <OnClick Instance="All_Tray"/>
+  </Instance>
+
+  <!-- VBox -->
+  <Instance xsi:type="sarturis__gtk__VBox" Name="MainBox" Spacing="5">
+    <PackStart Instance="Title" Expand="false"/>
+    <PackStart Instance="Message" Expand="false"/>
+    <PackStart Instance="Button" Expand="false"/>
+  </Instance>
+
+  <!-- Fenster -->
+  <Instance xsi:type="sarturis__application__gtk__Window" Name="MainWindow" Title="Input">
+    <Widget Instance="MainBox"/>
+  </Instance>
+
+</Config>

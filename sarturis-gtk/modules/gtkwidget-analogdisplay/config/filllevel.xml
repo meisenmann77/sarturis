@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/home/marcus/workspace/c++/Sarturis/sarturis_install/share/sarturis/schema/config-all.xsd">
+
+	<Instance xsi:type="sarturis__AnalogDuplex" Default="50" Name="Level"/>
+
+	<Instance xsi:type="sarturis__AnalogChain" Name="LevelChain">
+		<AnalogInput Instance="Slider"/>
+		<AnalogOutput Instance="Level"/>
+	</Instance>
+
+	<!-- Widget und Update -->
+	<!--
+	  Hier wird das eigentliche Ausgabe-Objekt definiert, die Parameter bedeuten dabei folgendes:
+	 
+	  MinValue - Der minimale Wert, der angezeigt werden soll
+  	  MaxValue - Der maximale Wert, der angezeigt werden soll
+	  Steps - Die Anzahl der Einteilungen, die angezeigt werden sollen (Achtung: Anders als bei
+	    CircularDisplay, bei dem Steps angibt, in welchem Abstand die Einteilungen vorkommen sollen)
+	  Caption - Eine Beschriftung, die links neben der Füllstandsanzeige angezeigt wird 
+	    (um 90° nach links gedreht)
+	
+	  Falls Werte außerhalb des oben mit MinValue und MaxValue definierten Wertebereichs
+  	  an das Modul übergeben werden, wird trotzdem gezeichnet oberhalb des Kastens weitergezeichnet.
+	
+  	  Zu beachten: Es wird in dem gesamten Modul noch kein Exception-Handling betrieben	
+	-->
+	<Instance xsi:type="sarturis__gtk__FillLevelDisplay" Name="Fill"
+		MinValue="0" MaxValue="100" Steps="5" Caption="Toll">
+		<FillLevel Instance="Level"/>
+	</Instance>
+
+	<Instance xsi:type="sarturis__gtk__AnalogSlider" Name="Slider"  Value="50"
+		Min="0" Max="100" ShowValue="true"/>
+
+	<Instance xsi:type="sarturis__Update" Name="FillDisplay_Update">
+		<Updateable Instance="Fill"/>
+	</Instance>
+
+	<Instance xsi:type="sarturis__Update" Name="Slider_Update">
+		<Updateable Instance="Slider"/>
+	</Instance>
+
+	<Instance xsi:type="sarturis__gtk__VBox" Name="Box">
+		<PackStart Instance="Fill"/>
+		<PackStart Instance="Slider"/>
+	</Instance>
+
+	<!-- Fenster-Kontext -->
+	<Instance xsi:type="sarturis__application__gtk__Window" Name="Window" Title="Fill"
+		Width="100" Height="200" >
+		<Widget Instance="Box"/>
+	</Instance>
+
+	<Instance xsi:type="sarturis__ExecutionGroup" Name="UpdateGroup">
+		<Executable Instance="Slider_Update"/> 
+		<Executable Instance="LevelChain"/>
+		<Executable Instance="FillDisplay_Update"/>
+	</Instance>
+
+	<!--Idle-Kontext-->
+	<Instance xsi:type="sarturis__application__Timeout" Name="TimeOut" Interval="5">
+		<Executable Instance="UpdateGroup"/>
+	</Instance>
+
+</Config>

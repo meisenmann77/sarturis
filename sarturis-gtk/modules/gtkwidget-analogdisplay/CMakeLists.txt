@@ -15,6 +15,10 @@ SET(gtkwidget-analogdisplay_headers include/cairowidget.h
 MODULE(gtkwidget-analogdisplay ${gtkwidget-analogdisplay_sources} ${gtkwidget-analogdisplay_headers})
 TARGET_LINK_LIBRARIES(gtkwidget-analogdisplay sarturisbase sarturisgtk ${GTK_LIBRARIES})
 
+# Beispiele
+INSTALL(FILES config/circular.xml DESTINATION share/sarturis/examples/gtk)
+INSTALL(FILES config/filllevel.xml DESTINATION share/sarturis/examples/gtk)
+
 # Doku
 MODULE_DOC(gtkwidget-analogdisplay)
 

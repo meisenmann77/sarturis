@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="/home/marcus/workspace/c++/Sarturis/sarturis_install/share/sarturis/schema/config-all.xsd">
+
+  <!-- Logger -->
+  <Instance xsi:type="sarturis__application__STDOUTLogger" Name="MainLogger"/>  
+        
+  <Instance xsi:type="sarturis__AnalogDuplex" Default="50" Name="Level"/>
+        
+  <Instance xsi:type="sarturis__AnalogChain" Name="LevelChain">
+    <AnalogInput Instance="Slider"/>
+    <AnalogOutput Instance="Level"/> 
+  </Instance>
+  
+  <!-- Widget und Update -->
+  <!-- 
+  	Hier wird das eigentliche Ausgabe-Objekt definiert, die Parameter bedeuten dabei folgendes:
+  
+  	MinValue - Der minimale Wert, der angezeigt werden soll
+  	MaxValue - Der maximale Wert, der angezeigt werden soll
+  	Expansion - Der Winkel, uebre den sich der Tacho ausdehnen soll
+  	Steps - Gibt an, in welchem Abstand Einteilungen vorkommen sollen (Achtung: Anders als bei
+	    FillLevelDisplay, bei dem Steps angibt, in wieviele Einteilungen vorkommen sollen)
+  	Caption - Eine Beschriftung, die unterhalb des Tachos angezeigt wird  
+  
+  	Falls Werte außerhalb des oben mit MinValue und MaxValue definierten Wertebereichs
+  	an das Modul übergeben werden, wird ein Logger::Warning ausgegeben.
+  
+  	Neu gezeichnet wird die Anzeige wenn sich ein Wert geändert hat nach der durch den Timer
+    spezifizierten Zeit
+  
+  	Zu beachten: Es wird in dem gesamten Modul noch kein Exception-Handling betrieben
+  -->
+  <Instance xsi:type="sarturis__gtk__CircularDisplay" Name="Circular" 
+    MinValue="-60" MaxValue="120" Expansion="240" Steps="10" Caption="Awesome-Meter">
+    <Value Instance="Level"/>
+  </Instance>
+
+  <Instance xsi:type="sarturis__gtk__AnalogSlider" Name="Slider" 
+   Value="50" Min="-120" Max="120" ShowValue="true"/>
+    
+  <Instance xsi:type="sarturis__Update" Name="CircularDisplay_Update">
+    <Updateable Instance="Circular"/>
+  </Instance>
+  
+  <Instance xsi:type="sarturis__Update" Name="Slider_Update">
+    <Updateable Instance="Slider"/>
+  </Instance>
+  
+  <Instance xsi:type="sarturis__gtk__VBox" Name="Box">
+   <PackStart Instance="Circular"/>
+   <PackStart Instance="Slider"/> 
+  </Instance>
+
+  <!-- Fenster-Kontext -->
+  <Instance xsi:type="sarturis__application__gtk__Window" Name="Window" Title="Fill" Width="300" Height="300" >
+    <Widget Instance="Box"/>
+  </Instance>
+  
+  <Instance xsi:type="sarturis__ExecutionGroup" Name="UpdateGroup">
+  	<Executable Instance="Slider_Update"/> 
+  	<Executable Instance="LevelChain"/>
+  	<Executable Instance="CircularDisplay_Update"/>
+  </Instance>
+  
+  <!--Idle-Kontext-->
+  <Instance xsi:type="sarturis__application__Timeout" Name="TimeOut" Interval="20">
+    <Executable Instance="UpdateGroup"/>
+  </Instance>
+
+</Config>

@@ -42,5 +42,8 @@ ENDIF(SARTURIS_WIN32)
 MODULE(tray-notifier ${tray-notifier_sources} ${tray-notifier_headers} ${embedded_headers} ${platform_sources} ${platform_headers})
 TARGET_LINK_LIBRARIES(tray-notifier sarturisgtk ${platform_libs})
 
+# Beispiel
+INSTALL(FILES config/tray-notifier.xml DESTINATION share/sarturis/examples/gtk)
+
 # Doku
 MODULE_DOC(tray-notifier)
