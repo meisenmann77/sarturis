@@ -22,16 +22,14 @@
 # Man kann nicht verhindern, dass der User pygtk importiert
 # aber dass hier kann dennoch eine Vereinfachung sein
 
-# GTK je nach GTK-Version
+import gi
+gi.require_version('Gtk', '3.0')
+
 from sarturis.gtk.pyembed import GtkVersion
 x=GtkVersion()
 if x==3:
   # GTK3 Imports
   from gi.repository import GObject as gobject
   from gi.repository import Gtk as gtk
-elif x==2:
-  import pygtk
-  import gobject
-  import gtk
 else:
-  print "No supported GTK Version"
+  print("No supported GTK Version")
