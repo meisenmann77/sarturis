@@ -19,7 +19,7 @@
 
 '''
 
-from gtkwrapper import gtk
-from gtkwrapper import gobject
-from gladegui import GladeGUI
-from guibase import GUIBase
+from .gtkwrapper import gtk
+from .gtkwrapper import gobject
+from .gladegui import GladeGUI
+from .guibase import GUIBase
