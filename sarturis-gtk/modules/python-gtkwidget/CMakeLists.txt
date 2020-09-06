@@ -1,5 +1,7 @@
 IF(CMAKE_CROSSCOMPILING)
   MESSAGE(STATUS "python-gtkwidget is not build with cross compiling (pygobject not available)")
+ELSEIF(MSVC)
+  MESSAGE(STATUS "python-gtkwidget is not build with msvc compilers (pygobject not available)")
 ELSE()
   # Include
   INCLUDE(sarturis-module)

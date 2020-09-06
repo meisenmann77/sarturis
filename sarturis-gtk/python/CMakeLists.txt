@@ -1,5 +1,7 @@
 IF(CMAKE_CROSSCOMPILING)
   MESSAGE(STATUS "pyembed_gtk is not build with cross compiling (pygobject not available)")
+ELSEIF(MSVC)
+  MESSAGE(STATUS "pyembed_gtk is not build with msvc compilers (pygobject not available)")
 ELSE()
   # Include
   INCLUDE(sarturis-install-file)
