@@ -30,6 +30,7 @@ using namespace sarturis::vlc::gtk;
 void Viewer::set_widget(GtkWidget* w)
 /******************************************************************************/
 {
-  libvlc_media_player_set_hwnd(player,(HWND)GDK_WINDOW_HWND(w->window));
+  HWND wnd=(HWND)GDK_WINDOW_HWND(gtk_widget_get_window(w));
+  libvlc_media_player_set_hwnd(player,wnd);
 }
 /******************************************************************************/
