@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<TypeDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="../../../sarturis/common/typedefinition.xsd">
+
+  <Module Name="misc-speech" Vendor="Meisenmann" Comment="Speech suppport">
+
+    <!-- Speak -->
+    <Type Name="sarturis::speech::Speak" Comment="speak a text">
+      <Base Type="sarturis::Executable"/>
+      <Reference Name="Text" Min="1" Max="1" Comment="text to speak">
+        <Instance Type="sarturis::TextInput"/>
+      </Reference>
+    </Type>
+
+    <CodeGeneration>
+      <ModuleInclude Filename="include/speak.h"/>
+    </CodeGeneration>
+  </Module>
+</TypeDefinition>
